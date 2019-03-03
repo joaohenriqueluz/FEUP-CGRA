@@ -12,10 +12,10 @@ class MyTangram extends CGFobject {
         scene.smallTri = new MyTriangleSmall(scene);
         scene.bigTri1 = new MyTriangleBig(scene);
 
-        scene.displayTri = false;
-        scene.displayDi = false;
-        scene.displayDi = false;
-        scene.displayP = false;
+        scene.displayTri = true;
+        scene.displayDi = true;
+        scene.displayDi = true;
+        scene.displayP = true;
         scene.displaySmallTi = true;
         scene.displayBigTri = true;
         
