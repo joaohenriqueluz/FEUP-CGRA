@@ -22,7 +22,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cube = new MyUnitCube(this);
-        this.diamond = new MyDiamond(this);
+        this.tangram = new MyTangram(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -69,8 +69,23 @@ class MyScene extends CGFscene {
 
 
         // ---- BEGIN Primitive drawing section
+       
 
+
+
+
+       this.pushMatrix();
+       this.translate(0,0,-0.5); //tranformacao do Exercicio 3.4
+       this.translate(0.5,-0.5,1);
        this.cube.display();
+       this.popMatrix();
+        
+       this.pushMatrix();
+       this.translate(0.5,0,0.5);
+       this.rotate(-Math.PI/2,1,0,0);
+       this.tangram.display(this);
+       this.popMatrix();
+       
 
           
         // ---- END Primitive drawing section
