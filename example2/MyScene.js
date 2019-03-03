@@ -21,21 +21,12 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.diamond = new MyDiamond(this);
-        this.triangle = new MyTriangle(this);
-        this.parallelogram = new MyParallelogram(this);
-        this.smallTri = new MyTriangleSmall(this);
-        this.bigTri1 = new MyTriangleBig(this);
+        
         this.tangram = new MyTangram(this);
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 1;
-        this.displayTri = false;
-        this.displayDi = false;
-        this.displayDi = false;
-        this.displayP = false;
-        this.displaySmallTi = true;
-        this.displayBigTri = true;
+        
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
