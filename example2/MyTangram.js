@@ -5,25 +5,7 @@
 class MyTangram extends CGFobject {
     constructor(scene) {
         super(scene);
-        
-    }
-    init() {
-        /* super.init(application);
-        this.initCameras();
-        this.initLights();
 
-        //Background color
-        this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
-        this.gl.clearDepth(100.0);
-        this.gl.enable(this.gl.DEPTH_TEST);
-        this.gl.enable(this.gl.CULL_FACE);
-        this.gl.depthFunc(this.gl.LEQUAL);
-         */ 
-
-        //Initialize scene objects
-        //this.axis = new CGFaxis(this);
-        
         scene.diamond = new MyDiamond(scene);
         scene.triangle = new MyTriangle(scene);
         scene.parallelogram = new MyParallelogram(scene);
@@ -36,9 +18,10 @@ class MyTangram extends CGFobject {
         scene.displayP = false;
         scene.displaySmallTi = true;
         scene.displayBigTri = true;
-
-
+        
     }
+
+   
 
    
     display(scene) {
