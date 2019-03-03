@@ -26,7 +26,7 @@ class MyScene extends CGFscene {
         this.parallelogram = new MyParallelogram(this);
         this.smallTri = new MyTriangleSmall(this);
         this.bigTri1 = new MyTriangleBig(this);
-
+        this.tangram = new MyTangram(this);
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 1;
@@ -81,7 +81,7 @@ class MyScene extends CGFscene {
                     0.0, 0.0, 0.0, 1.0];
 
         // ---- BEGIN Primitive drawing section
-
+/*
    if(this.displayDi)
     {
         this.pushMatrix()
@@ -139,9 +139,10 @@ class MyScene extends CGFscene {
             this.bigTri1.display();
             this.popMatrix();
 
-    }
+    }*/
        
-
+    
+    this.tangram.display(this);
 
 
 
