@@ -84,4 +84,3 @@ class MyScene extends CGFscene {
        
         // ---- END Primitive drawing section
     }
-}
