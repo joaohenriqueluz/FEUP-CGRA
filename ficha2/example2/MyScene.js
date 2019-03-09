@@ -134,7 +134,7 @@ class MyScene extends CGFscene {
     }*/
        
     
-    this.tangram.display(this);
+    this.tangram.display();
 
 
 

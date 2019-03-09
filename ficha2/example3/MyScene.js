@@ -70,17 +70,22 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
        
-        this.pushMatrix();
+       this.pushMatrix();
+       this.translate(3.75,0.25,2.75);
+       this.rotate(-Math.PI/2,1,0,0);
+      
+       this.tangram.display();
+       this.pushMatrix();
+       this.translate(0,0,-.75); // base ligeiramente separada do tangram para melhorar visibilidade
+       this.scale(7.5,5.5,1);
+       this.cube.display();
+       this.popMatrix();
 
-        this.translate(0.5,0,0.5);      //tranformacao do Exercicio 3.5
-        this.rotate(-Math.PI/2, 1,0,0); //tranformacao do Exercicio 3.5
+       
 
-        this.tangram.display(this);
-
-        this.translate(0,0,-0.5); //tranformacao do Exercicio 3.4
-        this.cube.display();
-
-        this.popMatrix();
+      this.popMatrix();
        
         // ---- END Primitive drawing section
     }
+
+}

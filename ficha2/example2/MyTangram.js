@@ -24,7 +24,7 @@ class MyTangram extends CGFobject {
    
 
    
-    display(scene) {
+    display() {
 
 
         var rot1 = [Math.cos(Math.PI/4),Math.sin(Math.PI/4), 0.0, 0.0,
@@ -32,62 +32,62 @@ class MyTangram extends CGFobject {
                     0.0, 0.0,1.0, 0.0,
                     0.0, 0.0, 0.0, 1.0];
        
-   if(scene.displayDi)
+   if(this.scene.displayDi)
     {
-        scene.pushMatrix()
-        scene.multMatrix(rot1);
-        scene.diamond.display();
-        scene.popMatrix();
+        this.scene.pushMatrix()
+        this.scene.multMatrix(rot1);
+        this.scene.diamond.display();
+        this.scene.popMatrix();
     }    
    
-    if(scene.displayTri)
+    if(this.scene.displayTri)
        {
-            scene.pushMatrix();
-            scene.translate(Math.sqrt(2)/2,Math.sqrt(2)/2,0);
-            scene.rotate(5*Math.PI/4,0,0,1);
-            scene.triangle.display();
-            scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(Math.sqrt(2)/2,Math.sqrt(2)/2,0);
+            this.scene.rotate(5*Math.PI/4,0,0,1);
+            this.scene.triangle.display();
+            this.scene.popMatrix();
        }
    
-    if(scene.displayP)
+    if(this.scene.displayP)
     {
-            scene.pushMatrix();
-            scene.translate(-3*Math.sqrt(2)/2,Math.sqrt(2)/2,0)
-            scene.scale(-1,1,1);
-            scene.rotate(Math.PI/4*3,0,0,1);
+            this.scene.pushMatrix();
+            this.scene.translate(-3*Math.sqrt(2)/2,Math.sqrt(2)/2,0)
+            this.scene.scale(-1,1,1);
+            this.scene.rotate(Math.PI/4*3,0,0,1);
            
-            scene.parallelogram.display();
-            scene.popMatrix();
+            this.scene.parallelogram.display();
+            this.scene.popMatrix();
 
     }  
-    if(scene.displaySmallTi)
+    if(this.scene.displaySmallTi)
     {
-            scene.pushMatrix();
-            scene.translate(-Math.sqrt(2),-Math.sqrt(2),0);
-            scene.rotate(3*Math.PI/4,0,0,1);
-            scene.smallTri.display();
-            scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(-Math.sqrt(2),-Math.sqrt(2),0);
+            this.scene.rotate(3*Math.PI/4,0,0,1);
+            this.scene.smallTri.display();
+            this.scene.popMatrix();
 
-            scene.pushMatrix();
-            scene.translate(Math.sqrt(2),-Math.sqrt(2),0);
-            scene.rotate(-3*Math.PI/4,0,0,1);
-            scene.smallTri.display();
-            scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(Math.sqrt(2),-Math.sqrt(2),0);
+            this.scene.rotate(-3*Math.PI/4,0,0,1);
+            this.scene.smallTri.display();
+            this.scene.popMatrix();
     }
 
-    if(scene.displayBigTri)
+    if(this.scene.displayBigTri)
     {
-            scene.pushMatrix();
-            scene.translate(3*Math.sqrt(2)/2,-Math.sqrt(2)/2,0);
-            scene.rotate(Math.PI/4,0,0,1);
-            scene.bigTri1.display();
-            scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(3*Math.sqrt(2)/2,-Math.sqrt(2)/2,0);
+            this.scene.rotate(Math.PI/4,0,0,1);
+            this.scene.bigTri1.display();
+            this.scene.popMatrix();
             
-            scene.pushMatrix();
-            scene.translate(-3*Math.sqrt(2)/2,-Math.sqrt(2)/2,0);
-            scene.rotate(-Math.PI/4,0,0,1);
-            scene.bigTri1.display();
-            scene.popMatrix();
+            this.scene.pushMatrix();
+            this.scene.translate(-3*Math.sqrt(2)/2,-Math.sqrt(2)/2,0);
+            this.scene.rotate(-Math.PI/4,0,0,1);
+            this.scene.bigTri1.display();
+            this.scene.popMatrix();
 
     }
        

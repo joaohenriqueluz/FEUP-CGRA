@@ -175,12 +175,8 @@ class MyScene extends CGFscene {
         else
             this.objects[this.selectedObject].disableNormalViz();
 
-        if(this.selectedObject == 3){
-            this.objects[this.selectedObject].display(this);
-        }
-        else{
             this.objects[this.selectedObject].display();
-        }
+        
       
         
         this.popMatrix();
