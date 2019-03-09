@@ -75,15 +75,11 @@ class MyScene extends CGFscene {
        this.rotate(-Math.PI/2,1,0,0);
       
        this.tangram.display();
-       this.pushMatrix();
        this.translate(0,0,-.75); // base ligeiramente separada do tangram para melhorar visibilidade
        this.scale(7.5,5.5,1);
        this.cube.display();
        this.popMatrix();
 
-       
-
-      this.popMatrix();
        
         // ---- END Primitive drawing section
     }
