@@ -90,7 +90,8 @@ class MyTangram extends CGFobject {
        
    if(this.scene.displayDi)
     {
-        this.materialGreen.apply();
+        //this.materialGreen.apply();
+        this.scene.materials[4].apply();
         this.scene.pushMatrix()
         this.scene.multMatrix(rot1);
         this.scene.diamond.display();
