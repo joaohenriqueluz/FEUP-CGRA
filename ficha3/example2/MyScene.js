@@ -31,7 +31,7 @@ class MyScene extends CGFscene {
         this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.cube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram':3, 'Cube':4};
+        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4};
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -39,13 +39,11 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayNormals = false;
         this.objectComplexity = 0.5;
-        this.scaleFactor = 1.0;
-        this.AmbntLight = 0.3;
+        this.scaleFactor = 2.0;
 
     }
     initLights() {
-       this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
-
+        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
 
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -96,7 +94,7 @@ class MyScene extends CGFscene {
 
         this.customMaterial.setShininess(this.customMaterialValues['Shininess']);
 
-    };
+    }
 
     updateObjectComplexity(){
         this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
@@ -154,8 +152,6 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
         
-        this.setGlobalAmbientLight(this.AmbntLight,this.AmbntLight,this.AmbntLight, 1.0);
-
         this.lights[0].update();
         this.lights[1].update();
 
@@ -174,13 +170,9 @@ class MyScene extends CGFscene {
             this.objects[this.selectedObject].enableNormalViz();
         else
             this.objects[this.selectedObject].disableNormalViz();
-
-            this.objects[this.selectedObject].display();
         
-      
-        
+        this.objects[this.selectedObject].display();
         this.popMatrix();
-        
         // ---- END Primitive drawing section
     }
 }
