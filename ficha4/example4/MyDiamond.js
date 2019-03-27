@@ -12,11 +12,11 @@ class MyDiamond extends CGFobject {
 		this.vertices = [
 			-1, 0, 0,	//0 0
 
-			0, -1, 0,	//1 2
+			0, -1, 0,	//1 1
 
-			0, 1, 0,	//2 4
+			0, 1, 0,	//2 2
 
-			1, 0, 0,	//3 6
+			1, 0, 0,	//3 3
 		];
 
 		this.normals = [
@@ -36,10 +36,10 @@ class MyDiamond extends CGFobject {
 		];
 
 		this.texCoords = [
-			0, 1,
-			1, 1,
-			0, 0,
-			1, 0
+			0,0.5,
+			0.25,0.75,
+			0.5,0.5,
+			0.25,0.25
 		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();

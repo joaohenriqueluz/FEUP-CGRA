@@ -24,27 +24,39 @@ class MyParallelogram extends CGFobject {
 		];
 
 		this.normals = [
-			0,0,1,
 			0,0,-1,
-
 			0,0,1,
+
 			0,0,-1,
-
 			0,0,1,
+
 			0,0,-1,
-
 			0,0,1,
-			0,0,-1
+
+			0,0,-1,
+			0,0,1
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
 			0, 2, 6,
 			2, 4, 6,
-			0, 6, 2,
-			2, 6, 4			
+			1, 7, 3,
+			3, 7, 5
 
 		];
+
+		this.texCoords = [
+			1,1,
+			1,1,
+			0.5,1,
+			0.5,1,
+			0.25,0.75,
+			0.25,0.75,
+			0.75,0.75,
+			0.75,0.75
+		]
+
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}

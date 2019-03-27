@@ -9,8 +9,10 @@ class MyTangram extends CGFobject {
         scene.diamond = new MyDiamond(scene);
         scene.triangle = new MyTriangle(scene);
         scene.parallelogram = new MyParallelogram(scene);
-        scene.smallTri = new MyTriangleSmall(scene);
-        scene.bigTri1 = new MyTriangleBig(scene);
+        scene.smallTri = new MyTriangleSmall(scene,true);
+        scene.smallTri2 = new MyTriangleSmall(scene,false);
+        scene.bigTri1 = new MyTriangleBig(scene,true);
+        scene.bigTri2 = new MyTriangleBig(scene,false);
 
         scene.displayTri = true;
         scene.displayDi = true;
@@ -82,8 +84,15 @@ class MyTangram extends CGFobject {
         this.diamondMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.diamondMaterial.setShininess(10.0);
         this.diamondMaterial.loadTexture('./images/tangram.png');
-        //this.diamondMaterial.setTexture(new CGFtexture(this.scene,'/Users/franciscorodrigues/CGRA/WebCGF2/CGRA/ficha4/example4/images/tangram.png'))
         this.diamondMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.triangleMaterial = new CGFappearance(this.scene);
+        this.triangleMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.triangleMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.triangleMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.triangleMaterial.setShininess(10.0);
+        this.triangleMaterial.loadTexture('./images/tangram.png');
+        this.triangleMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
 
     }
@@ -110,8 +119,9 @@ class MyTangram extends CGFobject {
 
     if(this.scene.displayTri)
        {
-            this.materialPink.apply();
+            //this.materialPink.apply();
             this.scene.pushMatrix();
+            this.triangleMaterial.apply();
             this.scene.translate(Math.sqrt(2)/2,Math.sqrt(2)/2,0);
             this.scene.rotate(5*Math.PI/4,0,0,1);
             this.scene.triangle.display();
@@ -120,9 +130,10 @@ class MyTangram extends CGFobject {
 
     if(this.scene.displayP)
     {
-            this.materialYellow.apply();
+            //this.materialYellow.apply();
+            this.diamondMaterial.apply();
             this.scene.pushMatrix();
-            this.scene.translate(-3*Math.sqrt(2)/2,Math.sqrt(2)/2,0)
+            this.scene.translate(-3*Math.sqrt(2)/2,Math.sqrt(2)/2,0);
             this.scene.scale(-1,1,1);
             this.scene.rotate(Math.PI/4*3,0,0,1);
 
@@ -132,35 +143,39 @@ class MyTangram extends CGFobject {
     }
     if(this.scene.displaySmallTi)
     {
-            this.materialRed.apply();
+            //this.materialRed.apply();
+            this.diamondMaterial.apply();
             this.scene.pushMatrix();
             this.scene.translate(-Math.sqrt(2),-Math.sqrt(2),0);
             this.scene.rotate(3*Math.PI/4,0,0,1);
             this.scene.smallTri.display();
             this.scene.popMatrix();
 
-            this.materialPurple.apply();
+            //this.materialPurple.apply();
+            this.diamondMaterial.apply();
             this.scene.pushMatrix();
             this.scene.translate(Math.sqrt(2),-Math.sqrt(2),0);
             this.scene.rotate(-3*Math.PI/4,0,0,1);
-            this.scene.smallTri.display();
+            this.scene.smallTri2.display();
             this.scene.popMatrix();
     }
 
     if(this.scene.displayBigTri)
     {
-            this.materialOrange.apply();
+            //this.materialOrange.apply();
+            this.diamondMaterial.apply();
             this.scene.pushMatrix();
             this.scene.translate(3*Math.sqrt(2)/2,-Math.sqrt(2)/2,0);
             this.scene.rotate(Math.PI/4,0,0,1);
             this.scene.bigTri1.display();
             this.scene.popMatrix();
 
-            this.materialBlue.apply();
+            //this.materialBlue.apply();
+            this.diamondMaterial.apply();
             this.scene.pushMatrix();
             this.scene.translate(-3*Math.sqrt(2)/2,-Math.sqrt(2)/2,0);
             this.scene.rotate(-Math.PI/4,0,0,1);
-            this.scene.bigTri1.display();
+            this.scene.bigTri2.display();
             this.scene.popMatrix();
 
     }
