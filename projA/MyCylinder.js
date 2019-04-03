@@ -1,9 +1,9 @@
 /**
-* MyPrism
+* My
 * @constructor
 */
 
-class MyPrism extends CGFobject {
+class MyCylinder extends CGFobject {
   constructor(scene, slices) {
     super(scene);
     this.scene = scene;
@@ -12,7 +12,7 @@ class MyPrism extends CGFobject {
 
   }
 
-  initBuffers(){
+ initBuffers(){
 
     this.vertices = [];
     this.indices = [];
@@ -21,7 +21,7 @@ class MyPrism extends CGFobject {
     var ang = 0;
     var alphaAng = 2*Math.PI/this.slices;
 
-    for(var i = 0; i < this.slices; i++, ang += alphaAng){
+    for(var i = 0; i <= this.slices; i++){
         // All vertices have to be declared for a given face
         // even if they are shared with others, as the normals
         // in each face will be different
@@ -32,35 +32,30 @@ class MyPrism extends CGFobject {
         var caa=Math.cos(ang+alphaAng);
 
 
-        var saa2=Math.sin(ang+alphaAng/2);
-        var caa2=Math.cos(ang+alphaAng/2);
-
-
-
-        this.vertices.push(ca, 0, sa);
-        this.vertices.push(caa, 0,saa);
         this.vertices.push(ca, 1, sa);
-        this.vertices.push(caa, 1,saa);
-
+        this.vertices.push(ca, 0, sa);
+        
         var normal= [
-            caa2,
+            ca,
             0,
-            saa2
+            sa
         ];
 
         // push normal once for each vertex of this triangle
         this.normals.push(...normal);
         this.normals.push(...normal);
-        this.normals.push(...normal);
-        this.normals.push(...normal);
-
-        this.indices.push((4*i),(4*i+2),(4*i+3),
-                        (4*i), (4*i+3), (4*i+1));
-
+         ang += alphaAng;
   }
 
-  this.primitiveType = this.scene.gl.TRIANGLES;
-  this.initGLBuffers();
+
+    for(var i = 0; i < this.slices; i++){
+      this.indices.push((2*i+2),(2*i+1),(2*i));
+      this.indices.push((2*i+1), (2*i+2), (2*i+3));
+    }
+
+    this.primitiveType = this.scene.gl.TRIANGLES;
+    this.initGLBuffers();
 }
 
 }
+
