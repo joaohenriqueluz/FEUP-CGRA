@@ -29,6 +29,15 @@ treeTopTexture){
        	this.scene.cylinder.display();
 		this.scene.popMatrix();
 
+        if(this.scene.displayNormals){
+            this.scene.cone.enableNormalViz();
+            this.scene.cylinder.enableNormalViz();
+        }
+        else{
+            this.scene.cone.disableNormalViz();
+            this.scene.cylinder.disableNormalViz();
+        }
+
     	
     }
 }

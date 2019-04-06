@@ -42,15 +42,17 @@ class MyUnitCubeQuad extends CGFobject {
 
   display(){
     //Top face
+    /*
     this.upMaterial.apply()
-    this.scene.pushMatrix();
+*/    this.scene.pushMatrix();
     this.scene.rotate(-Math.PI/2,1,0,0);
     this.scene.translate(0,0,0.5);
     this.scene.quad.display();
     this.scene.popMatrix();
 
     //Bottom face
-    this.bottomMaterial.apply();
+    /*
+    this.bottomMaterial.apply();*/
     this.scene.pushMatrix();
     this.scene.rotate(Math.PI/2,1,0,0);
     this.scene.translate(0,0,0.5);
@@ -58,14 +60,16 @@ class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
 
     //Front face
-    this.sideMaterial.apply();
+    /*
+    this.sideMaterial.apply();*/
     this.scene.pushMatrix();
     this.scene.translate(0,0,0.5);
     this.scene.quad.display();
     this.scene.popMatrix();
 
     //Back face
-    this.sideMaterial.apply();
+    /*
+    this.sideMaterial.apply();*/
     this.scene.pushMatrix();
     this.scene.rotate(Math.PI,0,1,0);
     this.scene.translate(0,0,0.5);
@@ -73,7 +77,8 @@ class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
 
     //Left face
-    this.sideMaterial.apply();
+    /*
+    this.sideMaterial.apply();*/
     this.scene.pushMatrix();
     this.scene.rotate(Math.PI/2,0,1,0);
     this.scene.translate(0,0,0.5);
@@ -81,7 +86,8 @@ class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
 
     //Right face
-    this.sideMaterial.apply();
+    /*
+    this.sideMaterial.apply();*/
     this.scene.pushMatrix();
     this.scene.rotate(-Math.PI/2,0,1,0);
     this.scene.translate(0,0,0.5);

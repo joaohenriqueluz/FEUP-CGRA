@@ -3,10 +3,9 @@
 * @constructor
 */
 class MyPyramid extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices) {
         super(scene);
         this.slices = slices;
-        this.stacks = stacks;
         this.initBuffers();
     }
     initBuffers() {
