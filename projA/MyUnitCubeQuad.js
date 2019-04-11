@@ -7,10 +7,10 @@ class MyUnitCubeQuad extends CGFobject {
   constructor(scene) {
     super(scene);
     scene.quad = new MyQuad(scene);
-    this.initMaterials();
+    //this.initMaterials();
   }
 
-
+/*
   initMaterials(){
 
       this.upMaterial = new CGFappearance(this.scene);
@@ -39,7 +39,7 @@ class MyUnitCubeQuad extends CGFobject {
 
 
   }
-
+*/
   display(){
     //Top face
     /*

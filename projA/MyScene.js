@@ -13,11 +13,11 @@ class MyScene extends CGFscene {
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
+        this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -25,8 +25,8 @@ class MyScene extends CGFscene {
         //this.cylinder = new MyCylinder(this, 12);
         //this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"",""); 
         //MyTree.constructor (scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture)
-        //this.treePatch = new MyTreeGroupPatch(this);
-        //this.treeRow = new MyTreeRowPatch(this);
+        this.treePatch = new MyTreeGroupPatch(this);
+        this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
 
         //Objects connected to MyInterface
@@ -75,6 +75,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        //this.house.display();
         this.house.display();
 
         // ---- END Primitive drawing section
