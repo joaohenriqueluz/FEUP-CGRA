@@ -23,11 +23,13 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         //this.prism = new MyPrism(this,33);
         //this.cylinder = new MyCylinder(this, 12);
-        //this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"",""); 
+        this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"",""); 
         //MyTree.constructor (scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture)
-        this.treePatch = new MyTreeGroupPatch(this);
-        this.treeRow = new MyTreeRowPatch(this);
+        //this.treePatch = new MyTreeGroupPatch(this);
+        //this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
+        //this.hill = new MyVoxelHill(this,5);
+
 
         //Objects connected to MyInterface
         this.displayAxis = true;

@@ -19,6 +19,8 @@ serialInclude(['../lib/CGF.js',
  'MyHouseColumn.js',
  'MyHouseFence.js',
  'MyHouseBase.js',
+ 'MyVoxelHill.js',
+ 'MyVoxelHillStep.js',
 
 main=function()
 {
