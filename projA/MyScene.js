@@ -23,21 +23,21 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         //this.prism = new MyPrism(this,33);
         //this.cylinder = new MyCylinder(this, 12);
-        this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"",""); 
+        this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"","");
         //MyTree.constructor (scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture)
-        //this.treePatch = new MyTreeGroupPatch(this);
-        //this.treeRow = new MyTreeRowPatch(this);
+        this.treePatch = new MyTreeGroupPatch(this);
+        this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
         //this.hill = new MyVoxelHill(this,5);
 
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayNormals = false;
-        this.displayCylinder = false;
-        this.displayPrism = false;
-        this.objectComplexity = 0.5;
-        this.scaleFactor = 2.0;
+        this.scaleFactor = 1.0;
+        this.showHouse = false;
+        this.showTreeRow = false;
+        this.showTreePatch = false;
+        this.showHill = false;
 
     }
     initLights() {
@@ -67,9 +67,13 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        if (this.displayAxis) this.axis.display();
 
-       
+        var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
+                    0.0, this.scaleFactor, 0.0, 0.0,
+                    0.0, 0.0, this.scaleFactor, 0.0,
+                    0.0, 0.0, 0.0, 1.0];
+        this.multMatrix(sca);
 
 
         //Apply default appearance
@@ -77,8 +81,11 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        //this.house.display();
-        this.house.display();
+        if (this.showHouse) this.house.display();
+        if (this.showTreeRow) this.treeRow.display();
+        if (this.showTreePatch) this.treePatch.display();
+
+        //this.hill.display();
 
         // ---- END Primitive drawing section
     }
