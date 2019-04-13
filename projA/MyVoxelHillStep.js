@@ -3,19 +3,26 @@
 * @constructor
 */
 class MyVoxelHillStep extends CGFobject {
-	constructor(scene, len){
+	constructor(scene, levels, level){
 		super(scene);
-        this.scene.hillCube = new MyUnitCubeQuad(scene);
-        this.len = len;
+    this.cube = new MyUnitCubeQuad(this.scene);
+    this.level = level;
+		this.translate = levels-level;
+		this.y = levels-this.translate;
 	}
-    
-    display(){
-    	
-    	this.scene.translate(0,1,0);
-    	this.scene.popMatrix();
 
-    	
-    }
+    display(inverse){
+
+			var len = 2*this.translate-1;
+			for (var i = 0; i < len; i++) {
+				this.scene.pushMatrix();
+				if (inverse) {
+					this.scene.translate(this.level+i,this.y,-this.level);
+				} else {
+					this.scene.translate(this.level+i,this.y,this.level);
+				}
+				this.cube.display();
+				this.scene.popMatrix();
+			}
+		}
 }
-
-
