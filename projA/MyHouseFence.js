@@ -18,6 +18,13 @@ class MyHouseFence extends CGFobject {
             this.scene.columnPiece.display();
         }
         this.scene.popMatrix();
+
+        /*
+        if(this.scene.displayNormals)
+            this.scene.columnPiece.enableNormalViz();
+        else
+            this.scene.columnPiece.disableNormalViz();
+        */  
     
     }
 

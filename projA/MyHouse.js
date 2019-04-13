@@ -55,6 +55,9 @@ class MyHouse extends CGFobject {
 
 
     display(){
+        
+    this.scene.pushMatrix();
+    this.scene.translate(0,2.5,0);
     this.wallTex.apply();
     this.scene.pushMatrix();
     this.scene.scale(10,5,10);
@@ -99,7 +102,19 @@ class MyHouse extends CGFobject {
     this.scene.translate(-10,-2.5,-10);
     this.scene.fence.display();
     this.scene.popMatrix();
+    this.scene.popMatrix();
 
+    /*if(this.scene.displayNormals){
+        this.scene.column.enableNormalViz();
+        this.scene.mainHouse.enableNormalViz();
+        this.scene.roof.enableNormalViz();
+    }
+        
+    else{
+        this.scene.column.disableNormalViz();
+        this.scene.mainHouse.disableNormalViz();
+        this.scene.roof.disableNormalViz();
+    }*/
 
 
     }

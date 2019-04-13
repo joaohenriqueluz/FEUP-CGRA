@@ -21,6 +21,7 @@ serialInclude(['../lib/CGF.js',
  'MyHouseBase.js',
  'MyVoxelHill.js',
  'MyVoxelHillStep.js',
+ 'MyCubeMap.js',
 
 main=function()
 {

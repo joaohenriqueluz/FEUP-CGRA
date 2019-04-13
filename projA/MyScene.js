@@ -29,22 +29,35 @@ class MyScene extends CGFscene {
         this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
         this.hill = new MyVoxelHill(this,5);
+        this.cubeMap = new MyCubeMap(this);
 
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayNormals = false;
         this.scaleFactor = 1.0;
         this.showHouse = false;
+        this.showTree = false;
         this.showTreeRow = false;
         this.showTreePatch = false;
         this.showHill = false;
 
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+        
+        this.lights[0].setPosition(0, 25, 0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].enable();
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].enable()//disable();
+        this.lights[0].setVisible(true);
         this.lights[0].update();
+
+        this.lights[1].setPosition(0, 5, 10, 1.0);
+        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
+        this.lights[1].enable();
+        this.lights[1].setVisible(true);
+        this.lights[1].update();
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -66,6 +79,8 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
 
+        this.lights[0].update();
+        this.lights[1].update();
         // Draw axis
         if (this.displayAxis) this.axis.display();
 
@@ -83,8 +98,10 @@ class MyScene extends CGFscene {
 
         if (this.showHouse) this.house.display();
         if (this.showTreeRow) this.treeRow.display();
+        if(this.showTree) this.tree.display();
         if (this.showTreePatch) this.treePatch.display();
         if (this.showHill) this.hill.display();
+        this.cubeMap.display();
 
         // ---- END Primitive drawing section
     }
