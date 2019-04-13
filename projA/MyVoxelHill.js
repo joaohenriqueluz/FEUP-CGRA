@@ -6,41 +6,33 @@ class MyVoxelHill extends CGFobject {
 	constructor(scene, levels){
 		super(scene);
     this.levels = levels;
-		this.cube = new MyQuad(this.scene);
+		this.cube = new MyUnitCubeQuad(this.scene);
 	}
 
     display(){
-    	this.scene.pushMatrix();
-    	for(var l = this.levels; j > 0; l++){
-				var j = 2*levels-1;
-		    for(var i = 0; i < j; i++){
-					this.pushMatrix();
-					this.translate(i,0,0);
-					this.cube.display();
-					this.popMatrix();
-		    }
 
-				for(var i = 0; i < j; i++){
-					this.pushMatrix();
-					this.translate(i,l,0);
-					this.cube.display();
-					this.popMatrix();
-		    }
+		    for(var i = 0; i < this.levels; i++){
+					var translate = this.levels-i;
+					var len = 2*translate-1;
+					this.level = new MyVoxelHillStep(this.scene,this.levels,i);
+					this.level.display(0);
+					if (i != this.levels-1) {
+						this.scene.pushMatrix();
+						this.scene.translate(0,0,len-1);
+						this.level.display(0);
+						this.scene.popMatrix();
 
-				for(var i = 0; i < j; i++){
-					this.pushMatrix();
-					this.translate(0,i,0);
-					this.cube.display();
-					this.popMatrix();
-		    }
+						this.scene.pushMatrix();
+						this.scene.rotate(-Math.PI/2,0,1,0);
+						this.level.display(1);
+						this.scene.popMatrix();
 
-				for(var i = 0; i < j; i++){
-					this.pushMatrix();
-					this.translate(l,i,0);
-					this.cube.display();
-					this.popMatrix();
+						this.scene.pushMatrix();
+						this.scene.translate(len-1,0,0);
+						this.scene.rotate(-Math.PI/2,0,1,0);
+						this.level.display(1);
+						this.scene.popMatrix();
+					}
 		    }
-    	}
-    	this.scene.popMatrix();
     }
 }
