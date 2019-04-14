@@ -44,20 +44,21 @@ class MyScene extends CGFscene {
         this.showTreeRow = false;
         this.showTreePatch = false;
         this.showHill = false;
+        this.day = true;
 
     }
     initLights() {
 
-        this.lights[0].setPosition(0, 25, 0, 1.0);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setPosition(0, 20, 0, 1.0);
+        this.lights[0].setDiffuse(0.0, 0.2, 0.5, 1.0);
+        this.lights[0].setSpecular(0.0, 0.2, 0.5, 2.0);
         this.lights[0].enable()//disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
         this.lights[1].setPosition(0, 5, 10, 1.0);
-        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
+        this.lights[1].setDiffuse(1.0, 0.8, 0.8, 1.0);
+        this.lights[1].setSpecular(1.0, 0.8, 0.8, 1.0);
         this.lights[1].enable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
@@ -81,6 +82,14 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+
+        if (this.day == true) {
+          this.lights[1].enable();
+          this.lights[0].disable();
+        } else {
+          this.lights[0].enable();
+          this.lights[1].disable();
+        }
 
         this.lights[0].update();
         this.lights[1].update();

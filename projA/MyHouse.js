@@ -14,7 +14,7 @@ class MyHouse extends CGFobject {
         this.initMaterials();
 
 	}
-    
+
     initMaterials(){
         this.wallTex = new CGFappearance(this.scene);
         this.wallTex.setAmbient(0.1, 0.1, 0.1, 1);
@@ -34,7 +34,7 @@ class MyHouse extends CGFobject {
 
         this.roofTex = new CGFappearance(this.scene);
         this.roofTex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.roofTex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.roofTex.setDiffuse(0.5, 0.5, 0.5, 1);
         this.roofTex.setSpecular(0.1, 0.1, 0.1, 1);
         this.roofTex.setShininess(10.0);
         this.roofTex.loadTexture('./textures/roof.PNG');
@@ -44,18 +44,18 @@ class MyHouse extends CGFobject {
         this.columnTex = new CGFappearance(this.scene);
         this.columnTex.setAmbient(0.1, 0.1, 0.1, 1);
         this.columnTex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.columnTex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.columnTex.setSpecular(0.9, 0.9, 0.9, 1);
         this.columnTex.setShininess(10.0);
         this.columnTex.loadTexture('./textures/marble.jpg');
         this.columnTex.setTextureWrap('REPEAT', 'REPEAT');
 
-       
+
 
     }
 
 
     display(){
-        
+
     this.scene.pushMatrix();
     this.scene.translate(0,2.5,0);
     this.wallTex.apply();
@@ -109,7 +109,7 @@ class MyHouse extends CGFobject {
         this.scene.mainHouse.enableNormalViz();
         this.scene.roof.enableNormalViz();
     }
-        
+
     else{
         this.scene.column.disableNormalViz();
         this.scene.mainHouse.disableNormalViz();
