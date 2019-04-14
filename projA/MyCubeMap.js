@@ -39,7 +39,7 @@ class MyCubeMap extends CGFobject {
 
         this.bottomMaterial = new CGFappearance(this.scene);
         this.bottomMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.bottomMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.bottomMaterial.setDiffuse(0.5, 0.5, 0.5, 1);
         this.bottomMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.bottomMaterial.setShininess(10.0);
         this.bottomMaterial.loadTexture('./textures/grass.jpg');
