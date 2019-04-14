@@ -46,17 +46,27 @@ class MyScene extends CGFscene {
         this.showHill = false;
         this.day = true;
 
+        this.texture1 = new CGFtexture(this, 'textures/cubemap.jpg');
+
+        this.cubeMapTex = new CGFappearance(this);
+        this.cubeMapTex.setAmbient(1.0, 1.0, 1.0, 1);
+        this.cubeMapTex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMapTex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMapTex.setShininess(10.0);
+        this.cubeMapTex.setTexture(this.texture1);
+        this.cubeMapTex.setTextureWrap('REPEAT', 'REPEAT');
+
     }
     initLights() {
 
-        this.lights[0].setPosition(0, 20, 0, 1.0);
+        this.lights[0].setPosition(0, 0, 0, 1.0);
         this.lights[0].setDiffuse(0.0, 0.2, 0.5, 1.0);
         this.lights[0].setSpecular(0.0, 0.2, 0.5, 2.0);
         this.lights[0].enable()//disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
-        this.lights[1].setPosition(0, 20, 5, 1.0);
+        this.lights[1].setPosition(0, 0, 5, 1.0);
         this.lights[1].setDiffuse(1.5, 1.2, 1.2, 1.0);
         this.lights[1].setSpecular(1.5, 1.2, 1.2, 1.0);
         this.lights[1].enable();
@@ -67,7 +77,7 @@ class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
-        this.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.setAmbient(0.9, 0.9, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
@@ -304,7 +314,7 @@ class MyScene extends CGFscene {
         this.translate(-50,0,40);
         this.hill5.display();
         this.popMatrix();
-
+        this.cubeMapTex.apply();
         this.cubeMap.display();
 
         // ---- END Primitive drawing section
