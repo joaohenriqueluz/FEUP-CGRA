@@ -9,8 +9,8 @@ class MyCubeMap extends CGFobject {
       scene.quad = new MyQuad(scene);
       this.initMaterials();
     }
-  
-  
+
+
     initMaterials(){
 
         this.frontMaterial = new CGFappearance(this.scene);
@@ -20,7 +20,7 @@ class MyCubeMap extends CGFobject {
         this.frontMaterial.setShininess(10.0);
         this.frontMaterial.loadTexture('./textures/hills_ft.png');
         this.frontMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        
+
         this.backMaterial = new CGFappearance(this.scene);
         this.backMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.backMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -28,7 +28,7 @@ class MyCubeMap extends CGFobject {
         this.backMaterial.setShininess(10.0);
         this.backMaterial.loadTexture('./textures/hills_bk.png');
         this.backMaterial.setTextureWrap('REPEAT', 'REPEAT');
-  
+
         this.upMaterial = new CGFappearance(this.scene);
         this.upMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.upMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -36,15 +36,15 @@ class MyCubeMap extends CGFobject {
         this.upMaterial.setShininess(10.0);
         this.upMaterial.loadTexture('./textures/hills_up.png');
         this.upMaterial.setTextureWrap('REPEAT', 'REPEAT');
-  
+
         this.bottomMaterial = new CGFappearance(this.scene);
         this.bottomMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.bottomMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.bottomMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.bottomMaterial.setShininess(10.0);
-        this.bottomMaterial.loadTexture('./textures/hills_dn.png');
+        this.bottomMaterial.loadTexture('./textures/grass.jpg');
         this.bottomMaterial.setTextureWrap('REPEAT', 'REPEAT');
-  
+
         this.leftMaterial = new CGFappearance(this.scene);
         this.leftMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.leftMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -60,8 +60,8 @@ class MyCubeMap extends CGFobject {
         this.rightMaterial.setShininess(10.0);
         this.rightMaterial.loadTexture('./textures/hills_rt.png');
         this.rightMaterial.setTextureWrap('REPEAT', 'REPEAT');
-  
-  
+
+
     }
 
     display(){
@@ -114,8 +114,7 @@ class MyCubeMap extends CGFobject {
         this.scene.rotate(-Math.PI/2,0,1,0);
         this.scene.quad.display();
         this.scene.popMatrix();
-        
+
         this.scene.popMatrix();
     }
   }
-  
