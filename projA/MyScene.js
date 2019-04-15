@@ -21,7 +21,7 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        
+
         this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"","");
         this.treeGroupPatch = new MyTreeGroupPatch(this);
         this.treeRow = new MyTreeRowPatch(this);
@@ -40,7 +40,7 @@ class MyScene extends CGFscene {
         this.objectIDs = { 'Tree': 0 , 'Tree Group': 1, 'Tree Row': 2, 'House': 3, 'Hill': 4, 'All Objects': 5};
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayNormals = false;
         this.selectedObject = 4;
         this.scaleFactor = 0.1;
@@ -56,7 +56,7 @@ class MyScene extends CGFscene {
 
         this.cubeMapTex = new CGFappearance(this);
         this.cubeMapTex.setAmbient(1.0, 1.0, 1.0, 1);
-        this.cubeMapTex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeMapTex.setDiffuse(0.9, 0.9, 1.0, 1);
         this.cubeMapTex.setSpecular(0.1, 0.1, 0.1, 1);
         this.cubeMapTex.setShininess(10.0);
         this.cubeMapTex.setTexture(this.texture1);
@@ -65,19 +65,19 @@ class MyScene extends CGFscene {
     }
     initLights() {
 
-        this.lights[0].setPosition(0, 10, 0, 1.0);
-        this.lights[0].setDiffuse(1.0, 0.7, 0.5, 1.0);
-        this.lights[0].setSpecular(1.0, 0.0, 0.5, 2.0);
-        this.lights[0].enable()
-        this.lights[0].setVisible(true);
-        this.lights[0].update();
+      this.lights[0].setPosition(0, 20, 0, 1.0);
+      this.lights[0].setDiffuse(0.0, 0.2, 0.5, 1.0);
+      this.lights[0].setSpecular(0.0, 0.2, 0.5, 2.0);
+      this.lights[0].enable()//disable();
+      this.lights[0].setVisible(true);
+      this.lights[0].update();
 
-        this.lights[1].setPosition(5, 10, 0, 1.0);
-        this.lights[1].setDiffuse(1.5, 1.2, 1.2, 1.0);
-        this.lights[1].setSpecular(1.5, 1.2, 1.2, 1.0);
-        this.lights[1].enable(); //disable();
-        this.lights[1].setVisible(true);
-        this.lights[1].update();
+      this.lights[1].setPosition(0, 10, 2, 1.0);
+      this.lights[1].setDiffuse(1.5, 1.2, 1.2, 1.0);
+      this.lights[1].setSpecular(1.5, 1.2, 1.2, 1.0);
+      this.lights[1].enable();
+      this.lights[1].setVisible(true);
+      this.lights[1].update();
 
     }
     initCameras() {

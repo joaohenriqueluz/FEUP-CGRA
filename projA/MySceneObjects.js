@@ -5,14 +5,14 @@
 class MySceneObjects extends CGFobject {
 	constructor(scene){
 		super(scene);
-        
+
         this.initMaterials();
     }
 
     initMaterials(){
         this.floorIsGrass = new CGFappearance(this.scene);
-        this.floorIsGrass.setAmbient(0.1, 0.1, 0.1, 1);
-        this.floorIsGrass.setDiffuse(0.5, 0.5, 0.5, 1);
+        this.floorIsGrass.setAmbient(1.0, 1.0, 1.0, 1);
+        this.floorIsGrass.setDiffuse(1.0, 1.0, 1.0, 1);
         this.floorIsGrass.setSpecular(0.1, 0.1, 0.1, 1);
         this.floorIsGrass.setShininess(10.0);
         this.floorIsGrass.loadTexture('./textures/grass.jpg');
@@ -217,7 +217,7 @@ class MySceneObjects extends CGFobject {
         this.scene.translate(-50,0,40);
         this.scene.hill5.display();
         this.scene.popMatrix();
-        
+
         this.scene.cubeMapTex.apply();
         this.scene.cubeMap.display();
 
@@ -229,10 +229,10 @@ class MySceneObjects extends CGFobject {
         this.scene.grass.display();
         this.scene.popMatrix();
 
-        
 
 
-    
+
+
     }
 
 }

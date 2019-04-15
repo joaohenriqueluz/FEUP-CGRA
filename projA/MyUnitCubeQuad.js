@@ -7,10 +7,10 @@ class MyUnitCubeQuad extends CGFobject {
   constructor(scene) {
     super(scene);
     scene.quad = new MyQuad(scene);
-    //this.initMaterials();
+    this.initMaterials();
   }
 
-/*
+
   initMaterials(){
 
       this.upMaterial = new CGFappearance(this.scene);
@@ -18,7 +18,7 @@ class MyUnitCubeQuad extends CGFobject {
       this.upMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
       this.upMaterial.setSpecular(0.1, 0.1, 0.1, 1);
       this.upMaterial.setShininess(10.0);
-      this.upMaterial.loadTexture('./images/mineTop.png');
+      this.upMaterial.loadTexture('./textures/mineTop.png');
       this.upMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
       this.bottomMaterial = new CGFappearance(this.scene);
@@ -26,7 +26,7 @@ class MyUnitCubeQuad extends CGFobject {
       this.bottomMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
       this.bottomMaterial.setSpecular(0.1, 0.1, 0.1, 1);
       this.bottomMaterial.setShininess(10.0);
-      this.bottomMaterial.loadTexture('./images/mineBottom.png');
+      this.bottomMaterial.loadTexture('./textures/mineBottom.png');
       this.bottomMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
       this.sideMaterial = new CGFappearance(this.scene);
@@ -34,25 +34,23 @@ class MyUnitCubeQuad extends CGFobject {
       this.sideMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
       this.sideMaterial.setSpecular(0.1, 0.1, 0.1, 1);
       this.sideMaterial.setShininess(10.0);
-      this.sideMaterial.loadTexture('./images/mineSide.png');
+      this.sideMaterial.loadTexture('./textures/mineSide.png');
       this.sideMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
 
   }
-*/
+
   display(){
     //Top face
-    /*
     this.upMaterial.apply()
-*/    this.scene.pushMatrix();
+    this.scene.pushMatrix();
     this.scene.rotate(-Math.PI/2,1,0,0);
     this.scene.translate(0,0,0.5);
     this.scene.quad.display();
     this.scene.popMatrix();
 
     //Bottom face
-    /*
-    this.bottomMaterial.apply();*/
+    this.bottomMaterial.apply();
     this.scene.pushMatrix();
     this.scene.rotate(Math.PI/2,1,0,0);
     this.scene.translate(0,0,0.5);
@@ -60,16 +58,14 @@ class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
 
     //Front face
-    /*
-    this.sideMaterial.apply();*/
+    this.sideMaterial.apply();
     this.scene.pushMatrix();
     this.scene.translate(0,0,0.5);
     this.scene.quad.display();
     this.scene.popMatrix();
 
     //Back face
-    /*
-    this.sideMaterial.apply();*/
+    this.sideMaterial.apply();
     this.scene.pushMatrix();
     this.scene.rotate(Math.PI,0,1,0);
     this.scene.translate(0,0,0.5);
@@ -77,8 +73,7 @@ class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
 
     //Left face
-    /*
-    this.sideMaterial.apply();*/
+    this.sideMaterial.apply();
     this.scene.pushMatrix();
     this.scene.rotate(Math.PI/2,0,1,0);
     this.scene.translate(0,0,0.5);
@@ -86,8 +81,7 @@ class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
 
     //Right face
-    /*
-    this.sideMaterial.apply();*/
+    this.sideMaterial.apply();
     this.scene.pushMatrix();
     this.scene.rotate(-Math.PI/2,0,1,0);
     this.scene.translate(0,0,0.5);
