@@ -5,21 +5,20 @@
 class MySceneObjects extends CGFobject {
 	constructor(scene){
 		super(scene);
-
         this.initMaterials();
     }
 
     initMaterials(){
         this.floorIsGrass = new CGFappearance(this.scene);
         this.floorIsGrass.setAmbient(1.0, 1.0, 1.0, 1);
-        this.floorIsGrass.setDiffuse(1.0, 1.0, 1.0, 1);
+        this.floorIsGrass.setDiffuse(0.1, 0.1, 0.1, 1);
         this.floorIsGrass.setSpecular(0.1, 0.1, 0.1, 1);
         this.floorIsGrass.setShininess(10.0);
         this.floorIsGrass.loadTexture('./textures/grass.jpg');
         this.floorIsGrass.setTextureWrap('REPEAT', 'REPEAT');
     }
 
-    display(){
+    display(day){
         //Display house
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,0.5);
@@ -218,6 +217,14 @@ class MySceneObjects extends CGFobject {
         this.scene.hill5.display();
         this.scene.popMatrix();
 
+				if (!day) {
+					this.scene.pushMatrix();
+					//this.scene.scale(0.2,0.5,0.2);
+					this.scene.translate(0,0,6);
+					this.scene.lantern.display();
+					this.scene.popMatrix();
+				}
+
         this.scene.cubeMapTex.apply();
         this.scene.cubeMap.display();
 
@@ -228,9 +235,6 @@ class MySceneObjects extends CGFobject {
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.scene.grass.display();
         this.scene.popMatrix();
-
-
-
 
 
     }

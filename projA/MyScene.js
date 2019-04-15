@@ -32,6 +32,7 @@ class MyScene extends CGFscene {
         this.hill5 = new MyVoxelHill(this,5);
         this.cubeMap = new MyCubeMap(this);
         this.grass = new MyQuad(this);
+        this.lantern = new MyLantern(this);
         this.displayer = new MySceneObjects(this);
 
         this.objects = [this.tree, this.treeGroupPatch, this.treeRow, this.house, this.hill10,this.displayer];
@@ -42,7 +43,7 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = false;
         this.displayNormals = false;
-        this.selectedObject = 4;
+        this.selectedObject = 5;
         this.scaleFactor = 0.1;
         this.showHouse = false;
         this.showTree = false;
@@ -55,8 +56,8 @@ class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'textures/cubemap.jpg');
 
         this.cubeMapTex = new CGFappearance(this);
-        this.cubeMapTex.setAmbient(1.0, 1.0, 1.0, 1);
-        this.cubeMapTex.setDiffuse(0.9, 0.9, 1.0, 1);
+        this.cubeMapTex.setAmbient(0.6, 0.6, 0.6, 1);
+        this.cubeMapTex.setDiffuse(0.1, 0.1, 0.1, 1);
         this.cubeMapTex.setSpecular(0.1, 0.1, 0.1, 1);
         this.cubeMapTex.setShininess(10.0);
         this.cubeMapTex.setTexture(this.texture1);
@@ -65,23 +66,33 @@ class MyScene extends CGFscene {
     }
     initLights() {
 
-      this.lights[0].setPosition(0, 20, 0, 1.0);
-      this.lights[0].setDiffuse(0.0, 0.2, 0.5, 1.0);
-      this.lights[0].setSpecular(0.0, 0.2, 0.5, 2.0);
+      this.lights[0].setPosition(0, 10, 0, 1.0);
+      this.lights[0].setDiffuse(0.0, 0.2, 0.4, 1.0);
+      this.lights[0].setSpecular(0.0, 0.2, 0.3, 1.0);
+      this.lights[0].setConstantAttenuation(0.5);
       this.lights[0].enable()//disable();
       this.lights[0].setVisible(true);
       this.lights[0].update();
 
-      this.lights[1].setPosition(0, 10, 2, 1.0);
-      this.lights[1].setDiffuse(1.5, 1.2, 1.2, 1.0);
-      this.lights[1].setSpecular(1.5, 1.2, 1.2, 1.0);
+      this.lights[1].setPosition(0, 20, 2, 1.0);
+      this.lights[1].setDiffuse(1.5, 1, 1, 1.0);
+      this.lights[1].setSpecular(1.5, 1, 1, 1.0);
+      this.lights[1].setConstantAttenuation(0.1);
       this.lights[1].enable();
       this.lights[1].setVisible(true);
       this.lights[1].update();
 
+      this.lights[2].setPosition(0, 1, 5, 1);
+      this.lights[2].setDiffuse(1.5, 0.5, 0.5, 1.0);
+      this.lights[2].setSpecular(1.5, 0.5, 0.5, 1.0);
+      this.lights[2].setQuadraticAttenuation(0.003);
+      this.lights[2].enable();
+      this.lights[2].setVisible(true);
+      this.lights[2].update();
+
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 20, 50, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.9, 0.9, 0.8, 1.0);
@@ -107,6 +118,7 @@ class MyScene extends CGFscene {
         } else{
             this.day = false;
             this.lights[0].enable();
+            this.lights[2].enable();
             this.lights[1].disable();
         }
 
@@ -126,7 +138,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.objects[this.selectedObject].display();
+        this.objects[this.selectedObject].display(this.day);
         // ---- END Primitive drawing section
     }
 }
