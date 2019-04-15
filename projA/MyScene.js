@@ -21,11 +21,9 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        //this.prism = new MyPrism(this,33);
-        //this.cylinder = new MyCylinder(this, 12);
+        
         this.tree = new MyTree(this,0.7,0.2,1.5,0.7,"","");
-        //MyTree.constructor (scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture)
-        this.treePatch = new MyTreeGroupPatch(this);
+        this.treeGroupPatch = new MyTreeGroupPatch(this);
         this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
         this.hill10 = new MyVoxelHill(this,10);
@@ -33,11 +31,18 @@ class MyScene extends CGFscene {
         this.hill12 = new MyVoxelHill(this,12);
         this.hill5 = new MyVoxelHill(this,5);
         this.cubeMap = new MyCubeMap(this);
+        this.grass = new MyQuad(this);
+        this.displayer = new MySceneObjects(this);
 
+        this.objects = [this.tree, this.treeGroupPatch, this.treeRow, this.house, this.hill10,this.displayer];
+
+        // Labels and ID's for object selection on MyInterface
+        this.objectIDs = { 'Tree': 0 , 'Tree Group': 1, 'Tree Row': 2, 'House': 3, 'Hill': 4, 'All Objects': 5};
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayNormals = false;
+        this.selectedObject = 4;
         this.scaleFactor = 0.1;
         this.showHouse = false;
         this.showTree = false;
@@ -45,6 +50,7 @@ class MyScene extends CGFscene {
         this.showTreePatch = false;
         this.showHill = false;
         this.day = true;
+        this.night = true;
 
         this.texture1 = new CGFtexture(this, 'textures/cubemap.jpg');
 
@@ -59,19 +65,20 @@ class MyScene extends CGFscene {
     }
     initLights() {
 
-        this.lights[0].setPosition(0, 0, 0, 1.0);
-        this.lights[0].setDiffuse(0.0, 0.2, 0.5, 1.0);
-        this.lights[0].setSpecular(0.0, 0.2, 0.5, 2.0);
-        this.lights[0].enable()//disable();
+        this.lights[0].setPosition(0, 10, 0, 1.0);
+        this.lights[0].setDiffuse(1.0, 0.7, 0.5, 1.0);
+        this.lights[0].setSpecular(1.0, 0.0, 0.5, 2.0);
+        this.lights[0].enable()
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
-        this.lights[1].setPosition(0, 0, 5, 1.0);
+        this.lights[1].setPosition(5, 10, 0, 1.0);
         this.lights[1].setDiffuse(1.5, 1.2, 1.2, 1.0);
         this.lights[1].setSpecular(1.5, 1.2, 1.2, 1.0);
-        this.lights[1].enable();
+        this.lights[1].enable(); //disable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
+
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -94,11 +101,13 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         if (this.day == true) {
-          this.lights[1].enable();
-          this.lights[0].disable();
-        } else {
-          this.lights[0].enable();
-          this.lights[1].disable();
+            this.night = false;
+            this.lights[1].enable();
+            this.lights[0].disable();
+        } else{
+            this.day = false;
+            this.lights[0].enable();
+            this.lights[1].disable();
         }
 
         this.lights[0].update();
@@ -107,216 +116,17 @@ class MyScene extends CGFscene {
         if (this.displayAxis) this.axis.display();
 
         var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
-                    0.0, this.scaleFactor, 0.0, 0.0,
-                    0.0, 0.0, this.scaleFactor, 0.0,
-                    0.0, 0.0, 0.0, 1.0];
+            0.0, this.scaleFactor, 0.0, 0.0,
+            0.0, 0.0, this.scaleFactor, 0.0,
+            0.0, 0.0, 0.0, 1.0];
         this.multMatrix(sca);
-
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        //Display house
-        this.pushMatrix();
-        this.scale(0.5,0.5,0.5);
-        this.house.display();
-        this.popMatrix();
 
-        //Display Tree Patches
-        this.pushMatrix();
-        this.translate(10,0,0);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-17,0,0);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(20,0,0);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(20,0,10);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(35,0,-25);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(35,0,-25);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(35,0,-13);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(35,0,0);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-46,0,-15);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-31,0,-15);
-        this.scale(2,2,2);
-        this.treePatch.display();
-        this.popMatrix();
-
-
-        //Display Tree Rows
-        this.pushMatrix();
-        this.translate(-25,0,20);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(10,0,25);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-45);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-45);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-40);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-40);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-35);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-35);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-30);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-30);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-25);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-25);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-20);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-20);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-15);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-15);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-20,0,-10);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,-10);
-        this.scale(2,2,2);
-        this.treeRow.display();
-        this.popMatrix();
-
-        //Display Hills
-        this.pushMatrix();
-        this.translate(-50,0,-50);
-        this.hill15.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-50,0,0);
-        this.hill12.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(30,0,-50);
-        this.hill10.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(-50,0,40);
-        this.hill5.display();
-        this.popMatrix();
-        this.cubeMapTex.apply();
-        this.cubeMap.display();
-
+        this.objects[this.selectedObject].display();
         // ---- END Primitive drawing section
     }
 }

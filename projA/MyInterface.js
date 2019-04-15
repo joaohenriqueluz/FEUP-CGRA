@@ -16,18 +16,11 @@ class MyInterface extends CGFinterface {
 
         var obj = this;
         this.gui.add(this.scene, 'displayAxis').name("Display axis");
-        this.gui.add(this.scene, 'displayNormals').name("Display normals");
         this.gui.add(this.scene, 'scaleFactor', 0.1, 1.0).name('Scale');
         this.gui.add(this.scene, 'day').name("Day");
 
 
-        // a folder for grouping switches for most os the scene´s objects
-        var objFldr = this.gui.addFolder('Objects');
-        objFldr.add(this.scene, 'showHouse').name("Display House");
-        objFldr.add(this.scene, 'showTree').name("Display Tree");
-        objFldr.add(this.scene, 'showTreeRow').name("Display Tree Row");
-        objFldr.add(this.scene, 'showTreePatch').name("Display Tree Patch");
-        objFldr.add(this.scene, 'showHill').name("Display Hill");
+        this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Object');
 
 
 

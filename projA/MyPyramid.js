@@ -58,9 +58,9 @@ class MyPyramid extends CGFobject {
             ang+=alphaAng;
 
 
-            this.texCoords.push(0.5,0.5);
-            this.texCoords.push(ca,caa);
-            this.texCoords.push(caa,ca);
+            this.texCoords.push(0.5,0);
+            this.texCoords.push(0,1);
+            this.texCoords.push(1,1);
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;

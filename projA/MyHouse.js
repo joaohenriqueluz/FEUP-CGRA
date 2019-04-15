@@ -41,13 +41,13 @@ class MyHouse extends CGFobject {
         this.roofTex.setTextureWrap('REPEAT', 'REPEAT');
 
 
-        this.columnTex = new CGFappearance(this.scene);
-        this.columnTex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.columnTex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.columnTex.setSpecular(0.9, 0.9, 0.9, 1);
-        this.columnTex.setShininess(10.0);
-        this.columnTex.loadTexture('./textures/marble.jpg');
-        this.columnTex.setTextureWrap('REPEAT', 'REPEAT');
+        this.marbleTex = new CGFappearance(this.scene);
+        this.marbleTex.setAmbient(0.1, 0.1, 0.1, 1);
+        this.marbleTex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.marbleTex.setSpecular(1, 1, 1, 1);
+        this.marbleTex.setShininess(10.0);
+        this.marbleTex.loadTexture('./textures/marble.jpg');
+        this.marbleTex.setTextureWrap('REPEAT', 'REPEAT');
 
 
 
@@ -69,7 +69,7 @@ class MyHouse extends CGFobject {
     this.scene.roof.display();
     this.scene.popMatrix();
 
-    this.columnTex.apply();
+    this.marbleTex.apply();
     this.scene.pushMatrix();
     this.scene.translate(6,-2.5,6);
     this.scene.scale(0.5,5,0.5);
