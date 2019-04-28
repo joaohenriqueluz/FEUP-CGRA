@@ -76,7 +76,9 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/ex2.vert", "shaders/ex2.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia2.frag"),
 			new CGFshader(this.gl, "shaders/ex21.vert", "shaders/ex21.frag"),
-			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag"),
+			new CGFshader(this.gl, "shaders/ex24.vert", "shaders/ex24.frag")
+
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -87,7 +89,9 @@ class ShaderScene extends CGFscene {
 		this.testShaders[10].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[10].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[12].setUniformsValues({ uSampler2: 1 });
-		this.testShaders[12].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[13].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[14].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[14].setUniformsValues({ timeFactor: 0 });
 
 
 
@@ -106,7 +110,9 @@ class ShaderScene extends CGFscene {
 			'Ex11': 9,
 			'Ex12': 10,
 			'Ex13': 11,
-			'Water': 12
+			'Ex21': 12,
+			'Ex23': 13,
+			'Ex24': 14
 
 		};
 
@@ -187,11 +193,12 @@ class ShaderScene extends CGFscene {
 
 	// called periodically (as per setUpdatePeriod() in init())
 	update(t) {
-		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
 		if (this.selectedExampleShader == 10)
 			this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		if (this.selectedExampleShader == 14)
+			this.testShaders[14].setUniformsValues({ timeFactor: t / 100 % 1000 });
 	}
 
 	// main display function
