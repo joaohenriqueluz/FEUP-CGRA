@@ -37,8 +37,8 @@ class MyScene extends CGFscene {
             this.plant.generate(
                 this.axiom,
                 {
-                    "F": [ this.ruleF ],
-                    "X": [ this.ruleX ]
+                    "F": [ "FF" ],
+                    "X": [ "F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X" ]
                 },
                 this.angle,
                 this.iterations,
