@@ -7,49 +7,28 @@
  class MyLeaf extends CGFobject{
     constructor(scene) {
         super(scene);
-        this.scene = scene;
-		this.initBuffers();
+		this.scene.leafd = new MyQuad(this.scene);
+		this.initMaterials();
 	}
-	initBuffers() {
-		this.vertices = [
-			-1, -1, 0,	//0
-			-1, -1, 0,	//0
-
-			1, -1, 0,	//1
-			1, -1, 0,	//1
-
-			-1, 1, 0,	//2
-			-1, 1, 0	//2
-		];
-
-		this.normals = [
-			0,0,1,
-			0,0,-1,
-
-			0,0,1,
-			0,0,-1,
-
-			0,0,1,
-			0,0,-1
-		];
-
-		//Counter-clockwise reference of vertices
-		this.indices = [
-            0, 2, 4,
-            5, 3, 1
-            
-		];
-		this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
-    }
+	
+	initMaterials(){
+		
+		this.leavesTex = new CGFappearance(this.scene);
+        this.leavesTex.setAmbient(0.1, 0.1, 0.1, 1);
+        this.leavesTex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.leavesTex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.leavesTex.setShininess(10.0);
+        this.leavesTex.loadTexture('../textures/treeLeaves.jpg');
+        this.leavesTex.setTextureWrap('REPEAT', 'REPEAT');
+		
+	}
+		
 
     display(){
-        // this.material1 = new CGFappearance(this);
-        // this.material1.setAmbient(0, 1, 0, 1.0);
-        // this.material1.setDiffuse(0, 1, 0, 1.0);
-        // this.material1.setSpecular(0, 0, 0, 1.0);
-        // this.material1.setShininess(10.0);
-
-        // this.scene.material1.apply();
+		this.leavesTex.apply();
+		this.scene.pushMatrix();
+    	this.scene.scale(3,1.0,0.4);
+       	this.scene.leafd.display();
+		this.scene.popMatrix();
     }
  }

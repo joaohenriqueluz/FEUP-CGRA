@@ -10,7 +10,6 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
-        this.initMaterials();
 
         //Background color
         this.gl.clearColor(1.0, 1.0, 1.0, 1.0);
@@ -22,6 +21,7 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Objects connected to MyInterface
+        this.displayAxis = true;
         this.axiom = "X"; // "X"; //
         this.ruleF = "FF"; // "FF"; //
         this.ruleX = "F[-X][X]F[-X]+FX";
@@ -69,19 +69,7 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    initMaterials(){
-        this.material1 = new CGFappearance(this);
-        this.material1.setAmbient(0, 1, 0, 1.0);
-        this.material1.setDiffuse(0, 1, 0, 1.0);
-        this.material1.setSpecular(0, 0, 0, 1.0);
-        this.material1.setShininess(10.0);
-
-        this.material2 = new CGFappearance(this);
-        this.material2.setAmbient(0.139, 0.069, 0.019, 1.0);
-        this.material2.setDiffuse(0.139, 0.069, 0.019, 1.0);
-        this.material2.setSpecular(0, 0, 0, 1.0);
-        this.material2.setShininess(10.0);
-    }
+    
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -94,22 +82,13 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        if(this.displayAxis)
+            this.axis.display();
 
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-
-        //this.lSystem.display();
-        // this.material1.apply();
-        // this.leaf.display();
-
-        // this.material2.apply();
-        // this.branch.display();
-
-        this.plant.display();
-
-        
+        this.plant.display();       
 
         // ---- END Primitive drawing section
     }
