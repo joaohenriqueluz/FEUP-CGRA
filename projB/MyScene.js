@@ -26,8 +26,10 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
         this.house = new MyHouse(this);
         this.cube = new MyCubeMap(this);
+        this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
+        this.scaleFactor = 0.1;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -61,16 +63,23 @@ class MyScene extends CGFscene {
 
         // Draw axis
         this.axis.display();
+        var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
+            0.0, this.scaleFactor, 0.0, 0.0,
+            0.0, 0.0, this.scaleFactor, 0.0,
+            0.0, 0.0, 0.0, 1.0];
+        this.multMatrix(sca);
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
-        this.popMatrix();
+        this.popMatrix();*/
+
+        this.bird.display();
 
         //this.cube.display();
 

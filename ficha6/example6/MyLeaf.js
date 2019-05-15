@@ -14,12 +14,12 @@
 	initMaterials(){
 		
 		this.leavesTex = new CGFappearance(this.scene);
-        this.leavesTex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.leavesTex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.leavesTex.setSpecular(0.1, 0.1, 0.1, 1);
-        this.leavesTex.setShininess(10.0);
-        this.leavesTex.loadTexture('../textures/treeLeaves.jpg');
-        this.leavesTex.setTextureWrap('REPEAT', 'REPEAT');
+    this.leavesTex.setAmbient(0.1, 0.1, 0.1, 1);
+    this.leavesTex.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.leavesTex.setSpecular(0.1, 0.1, 0.1, 1);
+    this.leavesTex.setShininess(10.0);
+    this.leavesTex.loadTexture('../textures/treeLeaves.jpg');
+    this.leavesTex.setTextureWrap('REPEAT', 'REPEAT');
 		
 	}
 		
