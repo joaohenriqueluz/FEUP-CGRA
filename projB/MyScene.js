@@ -23,14 +23,21 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new Plane(this, 32);
-        this.house = new MyHouse(this);
-        this.cube = new MyCubeMap(this);
-        this.bird = new MyBird(this);
+
+        this.objects = [
+            new Plane(this, 32),
+            new MyHouse(this),
+            new MyCubeMap(this),
+            new MyBird(this)
+        ];
 
         //Objects connected to MyInterface
-        this.scaleFactor = 0.1;
+        this.scaleFactor = 4;
+        this.update(1000);
+
     }
+
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -46,9 +53,12 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t){
-
+    update(t) {
+        this.objects[3].Y = 0.25*Math.sin(2*Math.PI* t/1000);
+        this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000);
     }
+
+
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -79,7 +89,7 @@ class MyScene extends CGFscene {
         this.plane.display();
         this.popMatrix();*/
 
-        this.bird.display();
+        this.objects[3].display();
 
         //this.cube.display();
 
