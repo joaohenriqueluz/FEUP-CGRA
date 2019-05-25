@@ -23,7 +23,6 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-
         this.objects = [
             new Plane(this, 32),
             new MyHouse(this),
@@ -32,12 +31,10 @@ class MyScene extends CGFscene {
         ];
 
         //Objects connected to MyInterface
-        this.scaleFactor = 4;
-        this.update(1000);
 
+        this.scaleFactor = 1;
+        this.speedFactor = 1;
     }
-
-
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -53,12 +50,54 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t) {
-        this.objects[3].Y = 0.25*Math.sin(2*Math.PI* t/1000);
-        this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000);
+    update(t){
+        this.checkKeys();
+        this.objects[3].Y = 0.25*Math.sin(2*Math.PI* t/1000*this.speedFactor);
+        this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000*this.speedFactor);
+        this.objects[3].move();
     }
 
+    checkKeys(){
+        var text="keys pressed; ";
+        var keysPressed=false;
 
+        if(this.gui.isKeyPressed("KeyW")){
+            text+=" W ";
+            keysPressed=true;
+            this.objects[3].accelerate(0.1*this.speedFactor);
+        }
+
+        if(this.gui.isKeyPressed("KeyS")){
+            text+=" S ";
+            keysPressed=true;
+            this.objects[3].accelerate(-0.1*this.speedFactor);
+        }
+
+        if(this.gui.isKeyPressed("KeyA")){
+            text+=" A ";
+            keysPressed=true;
+            this.objects[3].turn(-Math.PI/12*this.speedFactor);
+        }
+
+        if(this.gui.isKeyPressed("KeyD")){
+            text+=" D ";
+            keysPressed=true;
+            this.objects[3].turn(Math.PI/12*this.speedFactor);
+        }
+
+        if(this.gui.isKeyPressed("KeyR")){
+            text+=" R ";
+            keysPressed=true;
+            this.objects[3].deltaX = 0;
+            this.objects[3].deltaZ = 0;
+            this.objects[3].rotation = 0;
+            this.objects[3].speed = 0;
+        }
+
+        if(keysPressed){
+            console.log(text);
+        }
+    }
 
     display() {
         // ---- BEGIN Background, camera and axis setup

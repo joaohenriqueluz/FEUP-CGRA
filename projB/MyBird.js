@@ -13,13 +13,30 @@ class MyBird extends CGFobject {
         this.deltaX = 0;
         this.Y = 0;
         this.deltaZ = 0;
-        this.wingAlpha= 0;
+        this.wingAlpha=0;
 
-	}
+        this.speed = 0;
+        this.rotation = 2*Math.PI;
+
+    }
+    
+    turn(v){
+        this.rotation += v;
+    }
+
+    accelerate(v){
+        this.speed += v;
+    }
+
+    move(){
+        this.deltaZ += this.speed*Math.cos(this.rotation);
+        this.deltaX += this.speed*Math.sin(this.rotation);
+    }
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(0,this.Y+3,0);
+        this.scene.translate(this.deltaX,this.Y,this.deltaZ);
+        this.scene.rotate(this.rotation,0,1,0);
         this.scene.birdBody.display();
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0.5);
