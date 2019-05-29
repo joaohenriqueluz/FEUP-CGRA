@@ -24,17 +24,42 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.objects = [
-            new Plane(this, 32),
+            new MyTerrain(this),
             new MyHouse(this),
             new MyCubeMap(this),
             new MyBird(this)
         ];
+
+        this.appearance = new CGFappearance(this);
+        this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
+        this.appearance.setShininess(120);
+
+        this.terrainTexture = new CGFtexture(this, "images/terrain.jpg");
+        this.appearance.setTexture(this.terrainTexture);
+        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.gradientTex = new CGFtexture(this, "images/altimetry.png")
+        this.terrainMap = new CGFtexture(this, "images/heightmap.jpg");
+
+        this.testShaders = [
+        new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag")
+        ];
+
+
+        this.testShaders[0].setUniformsValues({ uSampler2: 1 });
+        this.testShaders[0].setUniformsValues({ uSampler3: 2});
+
+        
 
         //Objects connected to MyInterface
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
     }
+
+    
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -50,9 +75,10 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
     update(t){
         this.checkKeys();
-        this.objects[3].Y = 0.25*Math.sin(2*Math.PI* t/1000*this.speedFactor);
+        this.objects[3].deltaY = 0.25*Math.sin(2*Math.PI* t/1000*this.speedFactor);
         this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000*this.speedFactor);
         this.objects[3].move();
     }
@@ -99,6 +125,7 @@ class MyScene extends CGFscene {
         }
     }
 
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -120,19 +147,24 @@ class MyScene extends CGFscene {
 
         //Apply default appearance
         this.setDefaultAppearance();
+        // aplly main appearance (including texture in default texture unit 0)
+        this.appearance.apply();
+        this.setActiveShader(this.testShaders[0]);
+
+        this.terrainMap.bind(1);
+        this.gradientTex.bind(2);
 
         // ---- BEGIN Primitive drawing section
-        /*this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
-        this.plane.display();
-        this.popMatrix();*/
-
-        this.objects[3].display();
+        this.objects[0].display();
+        this.setActiveShader(this.defaultShader);
+        //this.objects[3].display();
 
         //this.cube.display();
 
         //this.house.display();
         // ---- END Primitive drawing section
+
+        //this.setActiveShader(this.defaultShader);
+
     }
 }

@@ -11,7 +11,7 @@ class MyBird extends CGFobject {
         this.scene.birdBick = new MyPyramid(scene,3);
         this.scene.birdWing = new MyBirdWing(scene);
         this.deltaX = 0;
-        this.Y = 0;
+        this.deltaY = 0;
         this.deltaZ = 0;
         this.wingAlpha=0;
 
@@ -35,7 +35,7 @@ class MyBird extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(this.deltaX,this.Y,this.deltaZ);
+        this.scene.translate(this.deltaX,this.deltaY+3,this.deltaZ);
         this.scene.rotate(this.rotation,0,1,0);
         this.scene.birdBody.display();
         this.scene.pushMatrix();
