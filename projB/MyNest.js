@@ -13,12 +13,7 @@ class MyNest extends CGFobject {
             new MyCylinder(scene,8)
         ];
 
-        this.floor = [
-            new MyTreeBranch(scene, false),
-            new MyTreeBranch(scene, false),
-            new MyTreeBranch(scene, false),
-            new MyTreeBranch(scene, false)
-        ];
+        this.floor = new MyTreeBranch(scene, false);
 
         this.deltaX = 5;
         this.deltaY = 5;
@@ -75,77 +70,77 @@ class MyNest extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0);
-        this.floor[0].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.1);
-        this.floor[1].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.2);
-        this.floor[2].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.3);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.4);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.5);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.6);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,0.7);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.1);
-        this.floor[1].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.2);
-        this.floor[2].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.3);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.4);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.5);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.6);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1,0,-0.7);
-        this.floor[3].display();
+        this.floor.display();
         this.scene.popMatrix();
     }
 

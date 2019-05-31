@@ -32,11 +32,11 @@ class MyScene extends CGFscene {
         ];
 
         this.branches = [
-            new MyTreeBranch(this),
-            new MyTreeBranch(this),
-            new MyTreeBranch(this),
-            new MyTreeBranch(this),
-            new MyTreeBranch(this)
+            new MyTreeBranch(this, true),
+            new MyTreeBranch(this, true),
+            new MyTreeBranch(this, true),
+            new MyTreeBranch(this, true),
+            new MyTreeBranch(this, true)
         ];
 
         this.appearance = new CGFappearance(this);
@@ -157,13 +157,15 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
         // aplly main appearance (including texture in default texture unit 0)
-        /*this.objects[3].display();
+        this.objects[3].display();
 
         this.branches[0].display();
         this.branches[1].display();
         this.branches[2].display();
         this.branches[3].display();
         this.branches[4].display();
+
+        this.objects[4].display();
 
         this.appearance.apply();
         this.setActiveShader(this.testShaders[0]);
@@ -173,9 +175,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         this.objects[0].display();
-        this.setActiveShader(this.defaultShader);*/
-
-        this.objects[4].display();
+        this.setActiveShader(this.defaultShader);
 
 
         //this.cube.display();
