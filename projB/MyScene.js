@@ -27,7 +27,8 @@ class MyScene extends CGFscene {
             new MyTerrain(this),
             new MyHouse(this),
             new MyCubeMap(this),
-            new MyBird(this)
+            new MyBird(this),
+            new MyNest(this)
         ];
 
         this.branches = [
@@ -156,7 +157,7 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
         // aplly main appearance (including texture in default texture unit 0)
-        this.objects[3].display();
+        /*this.objects[3].display();
 
         this.branches[0].display();
         this.branches[1].display();
@@ -172,7 +173,9 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         this.objects[0].display();
-        this.setActiveShader(this.defaultShader);
+        this.setActiveShader(this.defaultShader);*/
+
+        this.objects[4].display();
 
 
         //this.cube.display();

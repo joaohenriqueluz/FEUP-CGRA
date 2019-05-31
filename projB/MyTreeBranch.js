@@ -3,14 +3,20 @@
 * @constructor
 */
 class MyTreeBranch extends CGFobject {
-	constructor(scene){
+	constructor(scene, rand){
         super(scene);
         this.scene.body = new MyCylinder(scene,8);
         this.initMaterials();
 
-        this.deltaX = Math.floor(Math.random() * 20) - 10;
-        this.deltaZ = Math.floor(Math.random() * 20) - 10;
-        this.alpha = Math.floor(Math.random() * (Math.PI/2));
+        if(rand){
+            this.deltaX = Math.floor(Math.random() * 20) - 10;
+            this.deltaZ = Math.floor(Math.random() * 20) - 10;
+            this.alpha = Math.floor(Math.random() * (Math.PI/2));
+        } else {
+            this.deltaX = 0;
+            this.deltaZ = 0;
+            this.alpha = Math.PI/2;
+        }
     }
 
     initMaterials(){
