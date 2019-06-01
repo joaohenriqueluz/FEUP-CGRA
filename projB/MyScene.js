@@ -32,11 +32,11 @@ class MyScene extends CGFscene {
         ];
 
         this.branches = [
-            new MyTreeBranch(this, true),
-            new MyTreeBranch(this, true),
-            new MyTreeBranch(this, true),
-            new MyTreeBranch(this, true),
-            new MyTreeBranch(this, true)
+            new MyTreeBranch(this, true, 10,10),
+            new MyTreeBranch(this, true,14,-8),
+            new MyTreeBranch(this, true,9,0),
+            new MyTreeBranch(this, true,7,-5),
+            new MyTreeBranch(this, true,-5,10)
         ];
 
         this.appearance = new CGFappearance(this);
@@ -66,6 +66,9 @@ class MyScene extends CGFscene {
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
+
+
+        //Objects related to bird animation
     }
 
     
@@ -86,13 +89,14 @@ class MyScene extends CGFscene {
     }
 
     update(t){
-        this.checkKeys();
+        this.checkKeys(t);
+        this.objects[3].getBranch(t);
         this.objects[3].deltaY = 0.25*Math.sin(2*Math.PI* t/1000*this.speedFactor);
         this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000*this.speedFactor);
         this.objects[3].move();
     }
 
-    checkKeys(){
+    checkKeys(t){
         var text="keys pressed; ";
         var keysPressed=false;
 
@@ -120,11 +124,18 @@ class MyScene extends CGFscene {
             this.objects[3].turn(Math.PI/12*this.speedFactor);
         }
 
+        if (this.gui.isKeyPressed("KeyP")) {
+            text += " P ";
+            keysPressed = true;
+            this.objects[3].time = t;
+        }
+
         if(this.gui.isKeyPressed("KeyR")){
             text+=" R ";
             keysPressed=true;
             this.objects[3].deltaX = 0;
             this.objects[3].deltaZ = 0;
+            this.objects[3].Y = 7;
             this.objects[3].rotation = 0;
             this.objects[3].speed = 0;
         }
@@ -134,6 +145,17 @@ class MyScene extends CGFscene {
         }
     }
 
+
+    gotBranch(){
+        for(var i = 0; i < this.branches.length; i++){
+            if ((this.branches[i].deltaX <= this.objects[3].deltaX + 3) && (this.branches[i].deltaX >= this.objects[3].deltaX - 3))
+                if ((this.branches[i].deltaZ <= this.objects[3].deltaZ + 3) && (this.branches[i].deltaZ >= this.objects[3].deltaZ - 3))
+                {
+                    return true;
+                }
+        }
+        return false;
+    }
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -164,7 +186,7 @@ class MyScene extends CGFscene {
         this.branches[2].display();
         this.branches[3].display();
         this.branches[4].display();
-
+        
         this.objects[4].display();
 
         this.appearance.apply();

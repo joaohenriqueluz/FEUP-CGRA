@@ -3,40 +3,64 @@
 * @constructor
 */
 class MyBird extends CGFobject {
-	constructor(scene){
+    constructor(scene) {
         super(scene);
-        this.scene.birdBody = new MyUnitCubeQuad(scene);
-        this.scene.birdHead = new MyUnitCubeQuad(scene);
-        this.scene.birdEye = new MyCylinder(scene,5);
-        this.scene.birdBick = new MyPyramid(scene,3);
-        this.scene.birdWing = new MyBirdWing(scene);
+
         this.deltaX = 0;
         this.deltaY = 15;
         this.deltaZ = 0;
-        this.wingAlpha=0;
+        this.Y = 7;
 
+        this.scene.birdBody = new MyUnitCubeQuad(scene);
+        this.scene.birdHead = new MyUnitCubeQuad(scene);
+        this.scene.birdEye = new MyCylinder(scene, 5);
+        this.scene.birdBick = new MyPyramid(scene, 3);
+        this.scene.birdWing = new MyBirdWing(scene);
+        this.scene.twig = new MyTreeBranch(scene, this.deltaX, this.Y, this.deltaZ);
+        this.wingAlpha = 0;
+        this.diving = false;
+        this.hasBranch = false;
+        this.time = 0;
         this.speed = 0;
-        this.rotation = 2*Math.PI;
+        this.rotation = 2 * Math.PI;
 
     }
-    
-    turn(v){
+
+    turn(v) {
         this.rotation += v;
     }
 
-    accelerate(v){
+    accelerate(v) {
         this.speed += v;
     }
 
-    move(){
-        this.deltaZ += this.speed*Math.cos(this.rotation);
-        this.deltaX += this.speed*Math.sin(this.rotation);
+    move() {
+        this.deltaZ += this.speed * Math.cos(this.rotation);
+        this.deltaX += this.speed * Math.sin(this.rotation);
+    }
+
+    getBranch(t) {
+        this.deltaT = t - this.time;
+        if (this.deltaT < 1000) {
+            this.Y -= 0.3;
+        }
+
+        else if (this.deltaT < 2000) {
+            this.Y += 0.3;
+        }
+
+        else if (this.deltaT >= 1500 && this.deltaT <= 2500)
+            if (this.scene.gotBranch()==true) {
+                this.hasBranch = true;
+            }
+
     }
 
     display() {
+
         this.scene.pushMatrix();
-        this.scene.translate(this.deltaX,this.deltaY+3,this.deltaZ);
-        this.scene.rotate(this.rotation,0,1,0);
+        this.scene.translate(this.deltaX, this.deltaY + this.Y, this.deltaZ);
+        this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.birdBody.display();
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0.5);
@@ -47,7 +71,7 @@ class MyBird extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(-0.5, 0.250, 0);
         this.scene.scale(-1, 1, 1);
-        this.scene.rotate(this.wingAlpha,0,0,1);
+        this.scene.rotate(this.wingAlpha, 0, 0, 1);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.scene.rotate(Math.PI, 0, 0, 1);
         //this.scene.rotate(Math.PI,0,0,1);
@@ -68,7 +92,17 @@ class MyBird extends CGFobject {
         this.scene.scale(0.1, 0.1, 0.1);
         this.scene.birdBick.display();
         this.scene.popMatrix();
+
+        if (this.hasBranch == true) {
+            this.scene.pushMatrix();
+            this.scene.translate(-1, -3.5, 0);
+            this.scene.twig.display();
+            this.scene.popMatrix();
+        }
+
         this.scene.popMatrix();
+
+
 
     }
 
