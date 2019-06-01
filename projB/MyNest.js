@@ -17,6 +17,7 @@ class MyNest extends CGFobject {
 
         this.deltaX = 0;
         this.deltaZ = 0;
+        this.level= 0;
         this.initMaterials();
     }
 
@@ -30,21 +31,28 @@ class MyNest extends CGFobject {
         this.trunkTex.setTextureWrap('REPEAT', 'REPEAT');
     }
 
+
+    improve(){
+        this.level++;
+    }
+
     display() {
         this.trunkTex.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, 2, 0);
 
         this.scene.pushMatrix();
-
         this.scene.translate(0, 0.9, 0);
 
         this.scene.pushMatrix();
-        this.scene.scale(1, 0.1, 1);
-        this.braches[0].display();
+        for(var i = 0; i < this.level*2; i++){
+            this.scene.translate(0, 0.1*i, 0);
+            this.scene.scale(1, 0.1, 1);
+            this.braches[0].display();
+        }
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
+       /* this.scene.pushMatrix();
         this.scene.translate(0, 0.1, 0);
         this.scene.scale(1, 0.1, 1);
         this.braches[1].display();
@@ -66,7 +74,7 @@ class MyNest extends CGFobject {
         this.scene.translate(0, 0.4, 0);
         this.scene.scale(1, 0.1, 1);
         this.braches[4].display();
-        this.scene.popMatrix();
+        this.scene.popMatrix();*/
 
         this.scene.popMatrix();
 

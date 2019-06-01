@@ -22,7 +22,28 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(50);
 
         //Initialize scene objects
+
         this.axis = new CGFaxis(this);
+        this.axiom = "X"; // "X"; //
+        this.ruleF = "FF"; // "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.lSystem = new MyLSystem(this);
+        this.leaf = new MyLeaf(this);
+
+        this.plants = [
+            new MyLsPlant(this),
+            new MyLsPlant(this),
+            new MyLsPlant(this),
+            new MyLsPlant(this),
+            new MyLsPlant(this),
+            new MyLsPlant(this),
+            new MyLsPlant(this)
+        ];
+        this.branch = new MyBranch(this);
+
+
         this.objects = [
             new MyTerrain(this),
             new MyHouse(this),
@@ -38,6 +59,22 @@ class MyScene extends CGFscene {
             new MyTreeBranch(this, true, 7, -5),
             new MyTreeBranch(this, true, -5, 10)
         ];
+
+        this.doGenerate = function () {
+
+            for (var i = 0; i < this.plants.length; i++){
+                this.plants[i].generate(
+                    this.axiom,
+                    {
+                        "F": [ "FF" ],
+                        "X": [ "F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "F[/X][X]F[\\\\X]+X", "F[\\X][X]/X", "F[/X]\\X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X" ]
+                    },
+                    this.angle,
+                    this.iterations,
+                    this.scaleFactor
+                );
+            }
+        }
 
         this.appearance = new CGFappearance(this);
         this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
@@ -67,6 +104,8 @@ class MyScene extends CGFscene {
         this.scaleFactor = 1;
         this.speedFactor = 1;
 
+        this.doGenerate();
+
 
         //Objects related to bird animation
     }
@@ -88,20 +127,27 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    update(t) {
-        this.checkKeys(t);
-        if (this.objects[3].hasBranch == false) {
-            this.objects[3].getBranch(t);
-            console.log("no branch")
-        }
-        else {
-            this.objects[3].leaveBranch(t);
-            console.log("has branch")
+    // update(t) {
+    //     this.checkKeys(t);
+    //     if (this.objects[3].hasBranch == false) {
+    //         this.objects[3].getBranch(t);
+    //         console.log("no branch")
+    //     }
+    //     else {
+    //         this.objects[3].leaveBranch(t);
+    //         console.log("has branch")
 
-        }
+    //     }
 
-        this.objects[3].deltaY = 0.25 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
-        this.objects[3].wingAlpha = Math.PI / 4 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
+    //     this.objects[3].deltaY = 0.25 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
+    //     this.objects[3].wingAlpha = Math.PI / 4 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
+    //     this.objects[3].move();
+    // }
+
+    update(t){
+        this.checkKeys();
+        this.objects[3].deltaY = 0.25*Math.sin(2*Math.PI* t/1000*this.speedFactor);
+        this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000*this.speedFactor);
         this.objects[3].move();
     }
 
@@ -200,8 +246,51 @@ class MyScene extends CGFscene {
 
         //Apply default appearance
         this.setDefaultAppearance();
+
         // aplly main appearance (including texture in default texture unit 0)
         this.objects[3].display();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(20,3,5);
+        this.plants[0].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(10,3,7);
+        this.plants[1].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(-10,3,7);
+        this.plants[2].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(-25,3,-10);
+        this.plants[3].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(40,3,20);
+        this.plants[4].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(-30,3,-20);
+        this.plants[5].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(-25,3,15);
+        this.plants[6].display();
+        this.popMatrix();
 
         for (var i = 0; i < this.branches.length; i++) {
             this.branches[i].display();
