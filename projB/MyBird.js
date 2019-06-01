@@ -40,6 +40,7 @@ class MyBird extends CGFobject {
     }
 
     getBranch(t) {
+        console.log("get a branch");
         this.deltaT = t - this.time;
         if (this.deltaT < 1000) {
             this.Y -= 0.3;
@@ -53,7 +54,24 @@ class MyBird extends CGFobject {
             if (this.scene.gotBranch()==true) {
                 this.hasBranch = true;
             }
+    }
 
+    leaveBranch(t) {
+        console.log("leave the branch");
+        this.deltaT = t - this.time;
+        if (this.deltaT < 1000) {
+            this.Y -= 0.3;
+        }
+
+        else if (this.deltaT < 2000) {
+            this.Y += 0.3;
+        }
+
+        else if (this.deltaT >= 1500 && this.deltaT <= 2500)
+            if (this.scene.aboveNest() == true) {
+                this.hasBranch = false;
+                //improveNest;
+            }
     }
 
     display() {

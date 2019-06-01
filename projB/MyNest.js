@@ -15,8 +15,8 @@ class MyNest extends CGFobject {
 
         this.floor = new MyTreeBranch(scene, false);
 
-        this.deltaX = 5;
-        this.deltaY = 5;
+        this.deltaX = 0;
+        this.deltaZ = 0;
         this.initMaterials();
     }
 
