@@ -138,6 +138,7 @@ class MyScene extends CGFscene {
             this.objects[3].Y = 7;
             this.objects[3].rotation = 0;
             this.objects[3].speed = 0;
+            this.objects[3].hasBranch = false;
         }
 
         if(keysPressed){
@@ -151,6 +152,7 @@ class MyScene extends CGFscene {
             if ((this.branches[i].deltaX <= this.objects[3].deltaX + 3) && (this.branches[i].deltaX >= this.objects[3].deltaX - 3))
                 if ((this.branches[i].deltaZ <= this.objects[3].deltaZ + 3) && (this.branches[i].deltaZ >= this.objects[3].deltaZ - 3))
                 {
+                    this.branches.splice(i,1);
                     return true;
                 }
         }
@@ -181,11 +183,9 @@ class MyScene extends CGFscene {
         // aplly main appearance (including texture in default texture unit 0)
         this.objects[3].display();
 
-        this.branches[0].display();
-        this.branches[1].display();
-        this.branches[2].display();
-        this.branches[3].display();
-        this.branches[4].display();
+        for (var i = 0; i < this.branches.length; i++) {
+            this.branches[i].display();
+        }
         
         this.objects[4].display();
 
