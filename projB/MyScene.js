@@ -286,13 +286,11 @@ class MyScene extends CGFscene {
         this.objects[0].display();
         this.setActiveShader(this.defaultShader);
 
-        if(this.displayHouse){
-            this.pushMatrix();
-            this.scale(0.3,0.3,0.3);
-            this.translate(0,8,-15);
-            this.objects[1].display();
-            this.popMatrix();
-        }
+        this.pushMatrix();
+        this.scale(0.3,0.3,0.3);
+        this.translate(0,8,-15);
+        this.objects[1].display();
+        this.popMatrix();
 
         
         this.pushMatrix();
