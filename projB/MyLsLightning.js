@@ -40,7 +40,7 @@ class MyLsLightning extends MyLSystem {
             this.axiom,
             {
                 "F": ["FF"],
-                "X": ["F[-X][X]F[-X]+FX"]
+                "X": [ "F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "F[/X][X]F[\\\\X]+X", "F[\\X][X]/X", "F[/X]\\X"]
             },
             this.angle,
             this.iterations,
