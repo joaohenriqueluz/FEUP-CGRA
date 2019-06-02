@@ -28,6 +28,7 @@ serialInclude(['../lib/CGF.js',
     'MyBranch.js',
     'MyLsLightning.js',
     'MyRectQuad.js',
+    'MyTreeGroup.js',
 
     main = function () {
         var app = new CGFapplication(document.body);

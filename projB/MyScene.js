@@ -35,16 +35,6 @@ class MyScene extends CGFscene {
 
         this.lightning = new MyLsLightning(this);
 
-        this.plants = [
-            new MyLsPlant(this),
-            new MyLsPlant(this),
-            new MyLsPlant(this),
-            new MyLsPlant(this),
-            new MyLsPlant(this),
-            new MyLsPlant(this),
-            new MyLsPlant(this)
-        ];
-
         this.branch = new MyBranch(this);
 
         this.objects = [
@@ -52,7 +42,8 @@ class MyScene extends CGFscene {
             new MyHouse(this),
             new MyCubeMap(this),
             new MyBird(this),
-            new MyNest(this)
+            new MyNest(this),
+            new MyTreeGroup(this)
         ];
 
         this.branches = [
@@ -62,22 +53,6 @@ class MyScene extends CGFscene {
             new MyTreeBranch(this, true, 7, -5),
             new MyTreeBranch(this, true, -5, 10)
         ];
-
-        this.doGenerate = function () {
-
-            for (var i = 0; i < this.plants.length; i++) {
-                this.plants[i].generate(
-                    this.axiom,
-                    {
-                        "F": ["FF"],
-                        "X": ["F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "F[/X][X]F[\\\\X]+X", "F[\\X][X]/X", "F[/X]\\X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X"]
-                    },
-                    this.angle,
-                    this.iterations,
-                    this.scaleL
-                );
-            }
-        }
 
         this.appearance = new CGFappearance(this);
         this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
@@ -104,9 +79,6 @@ class MyScene extends CGFscene {
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
-
-        this.doGenerate();
-        //this.generateL();
 
 
         //Objects related to bird animation
@@ -161,14 +133,14 @@ class MyScene extends CGFscene {
             this.objects[3].accelerate(-0.1 * this.speedFactor);
         }
 
-        if (this.gui.isKeyPressed("KeyA")) {
-            text += " A ";
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " D ";
             keysPressed = true;
             this.objects[3].turn(-Math.PI / 12 * this.speedFactor);
         }
 
-        if (this.gui.isKeyPressed("KeyD")) {
-            text += " D ";
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " A ";
             keysPressed = true;
             this.objects[3].turn(Math.PI / 12 * this.speedFactor);
         }
@@ -252,52 +224,11 @@ class MyScene extends CGFscene {
         this.objects[3].display();
 
         this.pushMatrix();
-        this.translate(0,4,0);
+        this.translate(0,1,0);
         this.scale(2,2,2);
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(20, 3, 5);
-        this.plants[0].display();
+        this.objects[5].display();
         this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(10, 3, 7);
-        this.plants[1].display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(-10, 3, 7);
-        this.plants[2].display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(-25, 3, -10);
-        this.plants[3].display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(40, 3, 20);
-        this.plants[4].display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(-30, 3, -20);
-        this.plants[5].display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.scale(0.3, 0.3, 0.3);
-        this.translate(-25, 3, 15);
-        this.plants[6].display();
-        this.popMatrix();
-
-
-        this.popMatrix();
+        
         for (var i = 0; i < this.branches.length; i++) {
             this.branches[i].display();
         }

@@ -7,6 +7,14 @@
 class MyLsPlant extends MyLSystem {
     constructor(scene) {
         super(scene);
+
+        this.axiom = "X";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.scale = 0.5;
+
+        this.initGrammar();
+        this.init();
     }
 
     initGrammar() {
@@ -15,4 +23,22 @@ class MyLsPlant extends MyLSystem {
             "X": new MyLeaf(this.scene)
         };
     };
+
+    init() {
+        this.axiom = "X";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.scale = 0.5;
+
+        this.generate(
+            this.axiom,
+            {
+                "F": ["FF"],
+                "X": ["F[-X][X]F[-X]+FX"]
+            },
+            this.angle,
+            this.iterations,
+            this.scale
+        );
+    }
 }
