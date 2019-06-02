@@ -8,7 +8,6 @@ class MyHouse extends CGFobject {
        // this.scene.base = new MyHouseBase(scene);
         this.scene.mainHouse = new MyUnitCubeQuad(scene);
         this.scene.column = new MyPrism(scene,5);
-        //this.scene.fence = new MyHouseFence(scene,80);
         this.scene.roof = new MyPyramid(scene,4);
 
         this.initMaterials();
@@ -23,14 +22,6 @@ class MyHouse extends CGFobject {
         this.wallTex.setShininess(10.0);
         this.wallTex.loadTexture('./textures/wall.jpg');
         this.wallTex.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.fenceTex = new CGFappearance(this.scene);
-        this.fenceTex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.fenceTex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.fenceTex.setSpecular(0.1, 0.1, 0.1, 1);
-        this.fenceTex.setShininess(10.0);
-        this.fenceTex.loadTexture('./textures/fence.jpg');
-        this.fenceTex.setTextureWrap('REPEAT', 'REPEAT');
 
         this.roofTex = new CGFappearance(this.scene);
         this.roofTex.setAmbient(0.1, 0.1, 0.1, 1);
@@ -80,28 +71,6 @@ class MyHouse extends CGFobject {
     this.scene.column.display();
     this.scene.translate(24,0,0);
     this.scene.column.display();
-    this.scene.popMatrix();
-
-    //right side
-    this.fenceTex.apply();
-    this.scene.pushMatrix();
-    this.scene.translate(-10,-2.5,10);
-    this.scene.rotate(Math.PI/2,0,1,0);
-    //this.scene.fence.display();
-    this.scene.popMatrix();
-
-    //left side
-    this.scene.pushMatrix();
-    this.scene.translate(10,-2.5,-10);
-    this.scene.rotate(-Math.PI/2,0,1,0);
-    //this.scene.fence.display();
-    this.scene.popMatrix();
-
-    //Back
-    this.scene.pushMatrix();
-    this.scene.translate(-10,-2.5,-10);
-    //this.scene.fence.display();
-    this.scene.popMatrix();
     this.scene.popMatrix();
 
     /*if(this.scene.displayNormals){

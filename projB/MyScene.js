@@ -25,10 +25,6 @@ class MyScene extends CGFscene {
 
         this.axis = new CGFaxis(this);
 
-        this.axiom = "X"; // "X"; //
-        this.angle = 30.0;
-        this.iterations = 4;
-        this.scaleL = 0.65;
 
         //this.lSystem = new MyLSystem(this);
         //this.leaf = new MyLeaf(this);
@@ -74,11 +70,28 @@ class MyScene extends CGFscene {
         this.testShaders[0].setUniformsValues({ uSampler2: 1 });
         this.testShaders[0].setUniformsValues({ uSampler3: 2 });
 
+        this.texture1 = new CGFtexture(this, 'textures/cubemap.jpg');
+
+        this.cubeMapTex = new CGFappearance(this);
+        this.cubeMapTex.setAmbient(0.6, 0.6, 0.6, 1);
+        this.cubeMapTex.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.cubeMapTex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeMapTex.setShininess(10.0);
+        this.cubeMapTex.setTexture(this.texture1);
+        this.cubeMapTex.setTextureWrap('REPEAT', 'REPEAT');
+
 
         //Objects connected to MyInterface
 
         this.scaleFactor = 1;
+        this.scaleS = 1;
         this.speedFactor = 1;
+
+        this.displayBird = true;
+        this.displayHouse = true;
+        this.displayAxis = true;
+        this.displayTrees = true;
+        this.displaySkyBox = true;
 
 
         //Objects related to bird animation
@@ -90,7 +103,16 @@ class MyScene extends CGFscene {
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+
+        this.lights[1].setPosition(0, 20, 2, 1.0);
+        this.lights[1].setDiffuse(1.5, 1, 1, 1.0);
+        this.lights[1].setSpecular(1.5, 1, 1, 1.0);
+        this.lights[1].setConstantAttenuation(0.1);
+        this.lights[1].enable();
+        this.lights[1].setVisible(true);  
+        this.lights[1].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
@@ -214,20 +236,42 @@ class MyScene extends CGFscene {
             0.0, 0.0, this.scaleFactor, 0.0,
             0.0, 0.0, 0.0, 1.0];
         this.multMatrix(sca);
-        this.axis.display();
+        
+        if(this.displayAxis)
+            this.axis.display();
 
             
         //Apply default appearance
         this.setDefaultAppearance();
 
         // aplly main appearance (including texture in default texture unit 0)
-        this.objects[3].display();
 
-        this.pushMatrix();
-        this.translate(0,1,0);
-        this.scale(2,2,2);
-        this.objects[5].display();
-        this.popMatrix();
+        if(this.displayBird){
+            this.pushMatrix();
+            this.scale(this.scaleS,this.scaleS,this.scaleS);
+            this.objects[3].display();
+            this.popMatrix();
+        }
+
+        if(this.displayHouse){
+            this.pushMatrix();
+            this.translate(0,5,-8);
+            this.objects[1].display();
+            this.popMatrix();
+        }
+
+        if(this.displaySkyBox){
+            this.cubeMapTex.apply();
+            this.objects[2].display();
+        }
+
+        if(this.displayTrees){
+            this.pushMatrix();
+            this.translate(0,1,0);
+            this.scale(2,2,2);
+            this.objects[5].display();
+            this.popMatrix();
+        }
         
         for (var i = 0; i < this.branches.length; i++) {
             this.branches[i].display();

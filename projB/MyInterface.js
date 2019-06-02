@@ -14,8 +14,15 @@ class MyInterface extends CGFinterface {
         // http://workshop.chromeexperiments.com/examples/gui
         this.gui = new dat.GUI();
         
-        this.gui.add(this.scene, 'scaleFactor', 0.5, 3.0).name('scaleFactor');
+        this.gui.add(this.scene, 'scaleS', 0.5, 3.0).name('scaleFactor');
+        this.gui.add(this.scene, 'scaleFactor', 0.1, 3.0).name('scaleScene');
         this.gui.add(this.scene, 'speedFactor', 0.1, 3.0).name('speedFactor');
+
+        this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        this.gui.add(this.scene, 'displayBird').name('Display Bird');
+        this.gui.add(this.scene, 'displayHouse').name('Display House');
+        this.gui.add(this.scene, 'displayTrees').name('Display Trees');
+        this.gui.add(this.scene, 'displaySkyBox').name('Display SkyBox');
         
         var obj = this;
 
