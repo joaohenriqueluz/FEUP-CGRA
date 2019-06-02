@@ -9,7 +9,7 @@ class MyBird extends CGFobject {
         this.deltaX = 0;
         this.deltaY = 15;
         this.deltaZ = 0;
-        this.Y = 7;
+        this.Y = 8;
 
         this.scene.cylinder = new MyCylinder(scene, 5);
         this.scene.cone = new MyCone(scene, 5, 1);
