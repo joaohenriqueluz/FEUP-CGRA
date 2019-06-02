@@ -289,17 +289,17 @@ class MyScene extends CGFscene {
 
         if(this.displayHouse){
             this.pushMatrix();
-            this.scale(0.4,0.4,0.4);
-            this.translate(0,5,-8);
+            this.scale(0.3,0.3,0.3);
+            this.translate(0,8,-4);
             this.objects[1].display();
             this.popMatrix();
         }
 
         
         this.pushMatrix();
-        this.translate(this.kx*10, this.ky*10+15, this.kz*10 );
+        this.translate(this.kx*10, this.ky*10+70, this.kz*10 );
         this.rotate(Math.PI, 0,0,1);
-        this.scale(2,2,2);
+        this.scale(10,10,10);
         this.lightning.display();
         this.popMatrix();
 
