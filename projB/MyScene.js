@@ -24,16 +24,14 @@ class MyScene extends CGFscene {
         //Initialize scene objects
 
         this.axis = new CGFaxis(this);
+
         this.axiom = "X"; // "X"; //
-        this.ruleF = "FF"; // "FF"; //
-        this.ruleX = "F[-X][X]F[-X]+FX";
         this.angle = 30.0;
         this.iterations = 4;
-        this.angleL = 25.0;
-        this.iterationsL = 3;
-        this.scaleL = 0.5;
-        this.lSystem = new MyLSystem(this);
-        this.leaf = new MyLeaf(this);
+        this.scaleL = 0.65;
+
+        //this.lSystem = new MyLSystem(this);
+        //this.leaf = new MyLeaf(this);
 
         this.lightning = new MyLsLightning(this);
 
@@ -48,7 +46,6 @@ class MyScene extends CGFscene {
         ];
 
         this.branch = new MyBranch(this);
-
 
         this.objects = [
             new MyTerrain(this),
@@ -68,12 +65,12 @@ class MyScene extends CGFscene {
 
         this.doGenerate = function () {
 
-            for (var i = 0; i < this.plants.length; i++){
+            for (var i = 0; i < this.plants.length; i++) {
                 this.plants[i].generate(
                     this.axiom,
                     {
-                        "F": [ "FF" ],
-                        "X": [ "F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "F[/X][X]F[\\\\X]+X", "F[\\X][X]/X", "F[/X]\\X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X" ]
+                        "F": ["FF"],
+                        "X": ["F[-X][X]F[-X]+X", "F[-X][x]+X", "F[+X]-X", "F[/X][X]F[\\\\X]+X", "F[\\X][X]/X", "F[/X]\\X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X"]
                     },
                     this.angle,
                     this.iterations,
@@ -81,20 +78,6 @@ class MyScene extends CGFscene {
                 );
             }
         }
-
-        // this.generateL = function () {
-        //     this.lightning.generate(
-        //         this.axiom,
-        //         {
-        //             "F": [ "FF" ],
-        //             "X": [ "F[-X][X]F[-X]+FX" ]
-        //         },
-        //         this.angleL,
-        //         this.iterationsL,
-        //         this.scaleL
-        //     );
-       // }
-        
 
         this.appearance = new CGFappearance(this);
         this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
@@ -113,10 +96,8 @@ class MyScene extends CGFscene {
             new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag")
         ];
 
-
         this.testShaders[0].setUniformsValues({ uSampler2: 1 });
         this.testShaders[0].setUniformsValues({ uSampler3: 2 });
-
 
 
         //Objects connected to MyInterface
@@ -202,6 +183,9 @@ class MyScene extends CGFscene {
             text += " L ";
             keysPressed = true;
             this.lightning.startAnimation(t);
+            this.kx = Math.random(100);
+            this.ky = Math.random(100);
+            this.kz = Math.random(100);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
@@ -233,7 +217,6 @@ class MyScene extends CGFscene {
     }
 
     aboveNest() {
-        console.log("NEst " + this.objects[4].deltaZ + " birrd " + this.objects[3].deltaZ);
 
         if ((this.objects[4].deltaX <= this.objects[3].deltaX + 6) && (this.objects[4].deltaX >= this.objects[3].deltaX - 6))
             if ((this.objects[4].deltaZ <= this.objects[3].deltaZ + 6) && (this.objects[4].deltaZ >= this.objects[3].deltaZ - 6)) {
@@ -254,78 +237,90 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
         var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
             0.0, this.scaleFactor, 0.0, 0.0,
             0.0, 0.0, this.scaleFactor, 0.0,
             0.0, 0.0, 0.0, 1.0];
         this.multMatrix(sca);
+        this.axis.display();
 
+            
         //Apply default appearance
         this.setDefaultAppearance();
 
         // aplly main appearance (including texture in default texture unit 0)
-        // this.objects[3].display();
+        this.objects[3].display();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(20,3,5);
-        // this.plants[0].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.translate(0,4,0);
+        this.scale(2,2,2);
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(20, 3, 5);
+        this.plants[0].display();
+        this.popMatrix();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(10,3,7);
-        // this.plants[1].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(10, 3, 7);
+        this.plants[1].display();
+        this.popMatrix();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(-10,3,7);
-        // this.plants[2].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(-10, 3, 7);
+        this.plants[2].display();
+        this.popMatrix();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(-25,3,-10);
-        // this.plants[3].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(-25, 3, -10);
+        this.plants[3].display();
+        this.popMatrix();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(40,3,20);
-        // this.plants[4].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(40, 3, 20);
+        this.plants[4].display();
+        this.popMatrix();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(-30,3,-20);
-        // this.plants[5].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(-30, 3, -20);
+        this.plants[5].display();
+        this.popMatrix();
 
-        // this.pushMatrix();
-        // this.scale(0.3,0.3,0.3);
-        // this.translate(-25,3,15);
-        // this.plants[6].display();
-        // this.popMatrix();
+        this.pushMatrix();
+        this.scale(0.3, 0.3, 0.3);
+        this.translate(-25, 3, 15);
+        this.plants[6].display();
+        this.popMatrix();
 
-        // for (var i = 0; i < this.branches.length; i++) {
-        //     this.branches[i].display();
-        // }
 
-        // this.objects[4].display();
+        this.popMatrix();
+        for (var i = 0; i < this.branches.length; i++) {
+            this.branches[i].display();
+        }
 
-        // this.appearance.apply();
-        // this.setActiveShader(this.testShaders[0]);
+        this.objects[4].display();
 
-        // this.terrainMap.bind(1);
-        // this.gradientTex.bind(2);
+        this.appearance.apply();
+        this.setActiveShader(this.testShaders[0]);
 
-        // // ---- BEGIN Primitive drawing section
-        // this.objects[0].display();
-        // this.setActiveShader(this.defaultShader);
+        this.terrainMap.bind(1);
+        this.gradientTex.bind(2);
 
+        // ---- BEGIN Primitive drawing section
+        this.objects[0].display();
+        this.setActiveShader(this.defaultShader);
+
+        
+        this.pushMatrix();
+        this.translate(this.kx*10, this.ky*10+15, this.kz*10 );
+        this.rotate(Math.PI, 0,0,1);
+        this.scale(2,2,2);
         this.lightning.display();
+        this.popMatrix();
 
         //this.cube.display();
 
@@ -333,6 +328,5 @@ class MyScene extends CGFscene {
         // ---- END Primitive drawing section
 
         //this.setActiveShader(this.defaultShader);
-
     }
 }

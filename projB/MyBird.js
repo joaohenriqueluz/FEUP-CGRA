@@ -11,9 +11,9 @@ class MyBird extends CGFobject {
         this.deltaZ = 0;
         this.Y = 7;
 
-        this.scene.cylinder = new MyCylinder(scene,5);
-        this.scene.cone = new MyCone(scene,5,1);
-        this.scene.pyramid = new MyPyramid(scene,5,1);
+        this.scene.cylinder = new MyCylinder(scene, 5);
+        this.scene.cone = new MyCone(scene, 5, 1);
+        this.scene.pyramid = new MyPyramid(scene, 5, 1);
         this.scene.birdWing = new MyBirdWing(scene);
 
         this.scene.twig = new MyTreeBranch(scene, this.deltaX, this.Y, this.deltaZ);
@@ -40,7 +40,6 @@ class MyBird extends CGFobject {
     }
 
     getBranch(t) {
-        console.log("get a branch");
         this.deltaT = t - this.time;
         if (this.deltaT < 1000) {
             this.Y -= 0.3;
@@ -51,7 +50,7 @@ class MyBird extends CGFobject {
         }
 
         else if (this.deltaT >= 1500 && this.deltaT <= 2500)
-            if (this.scene.gotBranch()==true) {
+            if (this.scene.gotBranch() == true) {
                 this.hasBranch = true;
             }
     }
@@ -79,7 +78,7 @@ class MyBird extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.deltaX, this.deltaY + this.Y, this.deltaZ);
         this.scene.rotate(this.rotation, 0, 1, 0);
-        
+
         // body
         this.scene.pushMatrix();
         this.scene.scale(0.4, 0.5, 0.5);
@@ -96,7 +95,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI, 0, 0, 1);
         this.scene.birdWing.display();
         this.scene.popMatrix();
-        
+
         //left wing
         this.scene.pushMatrix();
         this.scene.translate(-0.25, 0.250, 0);
@@ -176,21 +175,15 @@ class MyBird extends CGFobject {
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.scene.pyramid.display();
         this.scene.popMatrix();
-        
+
         if (this.hasBranch == true) {
             this.scene.pushMatrix();
-            this.scene.translate(-1, 0,-2);
+            this.scene.translate(-1, 0, -2);
             this.scene.rotate(Math.PI / 2, 1, 0, 0);
             this.scene.twig.display();
             this.scene.popMatrix();
-          }
-       
+        }
 
         this.scene.popMatrix();
-
-
-
     }
-
-
 }
