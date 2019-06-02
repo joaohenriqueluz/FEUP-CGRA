@@ -253,16 +253,11 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
 
-        if(this.displayHouse){
-            this.pushMatrix();
-            this.translate(0,5,-8);
-            this.objects[1].display();
-            this.popMatrix();
-        }
-
         if(this.displaySkyBox){
+            this.pushMatrix();
             this.cubeMapTex.apply();
             this.objects[2].display();
+            this.popMatrix();
         }
 
         if(this.displayTrees){
@@ -277,7 +272,10 @@ class MyScene extends CGFscene {
             this.branches[i].display();
         }
 
+        this.pushMatrix();
+        this.translate(0,0,10);
         this.objects[4].display();
+        this.popMatrix();
 
         this.appearance.apply();
         this.setActiveShader(this.testShaders[0]);
@@ -289,6 +287,14 @@ class MyScene extends CGFscene {
         this.objects[0].display();
         this.setActiveShader(this.defaultShader);
 
+        if(this.displayHouse){
+            this.pushMatrix();
+            this.scale(0.4,0.4,0.4);
+            this.translate(0,5,-8);
+            this.objects[1].display();
+            this.popMatrix();
+        }
+
         
         this.pushMatrix();
         this.translate(this.kx*10, this.ky*10+15, this.kz*10 );
@@ -296,6 +302,7 @@ class MyScene extends CGFscene {
         this.scale(2,2,2);
         this.lightning.display();
         this.popMatrix();
+
 
         //this.cube.display();
 

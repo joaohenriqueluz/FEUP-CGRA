@@ -9,10 +9,10 @@ class MyBirdWing extends CGFobject {
         this.wingTip = new MyTriangle(scene);
         //this.initMaterials();
 
-	}
-
+    }
 
     display(){
+
         this.scene.pushMatrix();
         this.scene.translate(-1,-0.5,0);
         this.scene.pushMatrix();

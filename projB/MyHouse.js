@@ -16,12 +16,10 @@ class MyHouse extends CGFobject {
 
     initMaterials(){
         this.wallTex = new CGFappearance(this.scene);
-        this.wallTex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.wallTex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.wallTex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.wallTex.setAmbient(0.5, 0.3, 0, 1);
+        this.wallTex.setDiffuse(0, 0, 0, 1);
+        this.wallTex.setSpecular(0, 0, 0, 1);
         this.wallTex.setShininess(10.0);
-        this.wallTex.loadTexture('./textures/wall.jpg');
-        this.wallTex.setTextureWrap('REPEAT', 'REPEAT');
 
         this.roofTex = new CGFappearance(this.scene);
         this.roofTex.setAmbient(0.1, 0.1, 0.1, 1);
@@ -37,7 +35,7 @@ class MyHouse extends CGFobject {
         this.marbleTex.setDiffuse(0.9, 0.9, 0.9, 1);
         this.marbleTex.setSpecular(1, 1, 1, 1);
         this.marbleTex.setShininess(10.0);
-        this.marbleTex.loadTexture('./textures/marble.jpg');
+        this.marbleTex.loadTexture('./textures/marble.JPG');
         this.marbleTex.setTextureWrap('REPEAT', 'REPEAT');
 
 
