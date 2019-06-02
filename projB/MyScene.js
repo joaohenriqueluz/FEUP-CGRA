@@ -273,7 +273,6 @@ class MyScene extends CGFscene {
         }
 
         this.pushMatrix();
-        this.translate(0,0,10);
         this.objects[4].display();
         this.popMatrix();
 
@@ -290,7 +289,7 @@ class MyScene extends CGFscene {
         if(this.displayHouse){
             this.pushMatrix();
             this.scale(0.3,0.3,0.3);
-            this.translate(0,8,-4);
+            this.translate(0,8,-15);
             this.objects[1].display();
             this.popMatrix();
         }
