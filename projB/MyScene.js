@@ -29,8 +29,13 @@ class MyScene extends CGFscene {
         this.ruleX = "F[-X][X]F[-X]+FX";
         this.angle = 30.0;
         this.iterations = 4;
+        this.angleL = 25.0;
+        this.iterationsL = 3;
+        this.scaleL = 0.5;
         this.lSystem = new MyLSystem(this);
         this.leaf = new MyLeaf(this);
+
+        this.lightning = new MyLsLightning(this);
 
         this.plants = [
             new MyLsPlant(this),
@@ -41,6 +46,7 @@ class MyScene extends CGFscene {
             new MyLsPlant(this),
             new MyLsPlant(this)
         ];
+
         this.branch = new MyBranch(this);
 
 
@@ -71,10 +77,24 @@ class MyScene extends CGFscene {
                     },
                     this.angle,
                     this.iterations,
-                    this.scaleFactor
+                    this.scaleL
                 );
             }
         }
+
+        // this.generateL = function () {
+        //     this.lightning.generate(
+        //         this.axiom,
+        //         {
+        //             "F": [ "FF" ],
+        //             "X": [ "F[-X][X]F[-X]+FX" ]
+        //         },
+        //         this.angleL,
+        //         this.iterationsL,
+        //         this.scaleL
+        //     );
+       // }
+        
 
         this.appearance = new CGFappearance(this);
         this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
@@ -105,6 +125,7 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
 
         this.doGenerate();
+        //this.generateL();
 
 
         //Objects related to bird animation
@@ -127,29 +148,21 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    // update(t) {
-    //     this.checkKeys(t);
-    //     if (this.objects[3].hasBranch == false) {
-    //         this.objects[3].getBranch(t);
-    //         console.log("no branch")
-    //     }
-    //     else {
-    //         this.objects[3].leaveBranch(t);
-    //         console.log("has branch")
+    update(t) {
+        this.checkKeys(t);
+        this.lightning.update(t);
+        if (this.objects[3].hasBranch == false) {
+            this.objects[3].getBranch(t);
+        }
+        else {
+            this.objects[3].leaveBranch(t);
+        }
 
-    //     }
-
-    //     this.objects[3].deltaY = 0.25 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
-    //     this.objects[3].wingAlpha = Math.PI / 4 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
-    //     this.objects[3].move();
-    // }
-
-    update(t){
-        this.checkKeys();
-        this.objects[3].deltaY = 0.25*Math.sin(2*Math.PI* t/1000*this.speedFactor);
-        this.objects[3].wingAlpha = Math.PI/4* Math.sin(2*Math.PI*t/1000*this.speedFactor);
+        this.objects[3].deltaY = 0.25 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
+        this.objects[3].wingAlpha = Math.PI / 4 * Math.sin(2 * Math.PI * t / 1000 * this.speedFactor);
         this.objects[3].move();
     }
+
 
     checkKeys(t) {
         var text = "keys pressed; ";
@@ -183,8 +196,12 @@ class MyScene extends CGFscene {
             text += " P ";
             keysPressed = true;
             this.objects[3].time = t;
+        }
 
-
+        if (this.gui.isKeyPressed("KeyL")) {
+            text += " L ";
+            keysPressed = true;
+            this.lightning.startAnimation(t);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
@@ -248,66 +265,67 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // aplly main appearance (including texture in default texture unit 0)
-        this.objects[3].display();
+        // this.objects[3].display();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(20,3,5);
-        this.plants[0].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(20,3,5);
+        // this.plants[0].display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(10,3,7);
-        this.plants[1].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(10,3,7);
+        // this.plants[1].display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(-10,3,7);
-        this.plants[2].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(-10,3,7);
+        // this.plants[2].display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(-25,3,-10);
-        this.plants[3].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(-25,3,-10);
+        // this.plants[3].display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(40,3,20);
-        this.plants[4].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(40,3,20);
+        // this.plants[4].display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(-30,3,-20);
-        this.plants[5].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(-30,3,-20);
+        // this.plants[5].display();
+        // this.popMatrix();
 
-        this.pushMatrix();
-        this.scale(0.3,0.3,0.3);
-        this.translate(-25,3,15);
-        this.plants[6].display();
-        this.popMatrix();
+        // this.pushMatrix();
+        // this.scale(0.3,0.3,0.3);
+        // this.translate(-25,3,15);
+        // this.plants[6].display();
+        // this.popMatrix();
 
-        for (var i = 0; i < this.branches.length; i++) {
-            this.branches[i].display();
-        }
+        // for (var i = 0; i < this.branches.length; i++) {
+        //     this.branches[i].display();
+        // }
 
-        this.objects[4].display();
+        // this.objects[4].display();
 
-        this.appearance.apply();
-        this.setActiveShader(this.testShaders[0]);
+        // this.appearance.apply();
+        // this.setActiveShader(this.testShaders[0]);
 
-        this.terrainMap.bind(1);
-        this.gradientTex.bind(2);
+        // this.terrainMap.bind(1);
+        // this.gradientTex.bind(2);
 
-        // ---- BEGIN Primitive drawing section
-        this.objects[0].display();
-        this.setActiveShader(this.defaultShader);
+        // // ---- BEGIN Primitive drawing section
+        // this.objects[0].display();
+        // this.setActiveShader(this.defaultShader);
 
+        this.lightning.display();
 
         //this.cube.display();
 
